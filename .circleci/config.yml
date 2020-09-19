@@ -6,7 +6,7 @@ jobs:
       - image: "cimg/base:stable"
     steps:
       - run: echo "master branch is only for site generation"
-      - run: echo "please checkout dev branch for acive development"
+      - run: echo "please checkout dev branch for active development"
 
 workflows:
   empty-workflow:
