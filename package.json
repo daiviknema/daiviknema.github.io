@@ -57,6 +57,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "deploy": "gatsby build && gh-pages -d public -b master"
+    "deploy": "gatsby build && gh-pages -d public -b master",
+    "deploy_from_ci": "gatsby build && gh-pages -r https://$GITHUB_ACCESS_TOKEN@github.com/daiviknema/daiviknema.github.io -d public -b master"
   }
 }
