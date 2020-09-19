@@ -1,35 +1,46 @@
 version: 2.1
 
+# Provides node and npm
 orbs:
   node: circleci/node@4.0.0
 
+# Define some common commands that will be used by jobs
 commands:
   download-dependencies:
     steps:
+      # Checkout source code
+      - checkout
+
+      # Install node and npm
       - node/install
-      - run: node --version
+
+      # Install the Gatsby CLI tool
       - run: npm install -g gatsby-cli
+
+      # Install all project dependencies to node_modules/
+      - run: npm install
   set-git-config:
     steps:
+      # Set the username and password configs for Git
       - run: git config --global user.name "circle-ci"
       - run: git config --global user.email "circle-ci@daiviknema.github.io"
 
 jobs:
+  # Build the site. Generate static files
   build:
     docker:
       - image: "cimg/base:stable"
     steps:
-      - checkout
       - download-dependencies
-      - run: npm install
       - run: gatsby build
+
+  # Deploy the site. Ie, generate the static files and push them to master
   deploy:
     docker:
       - image: "cimg/base:stable"
     steps:
-      - checkout
       - download-dependencies
-      - run: npm install
+      # We need to set some git configs otherwise the gh-pages package doesn't work
       - set-git-config
       - run: npm run deploy_from_ci
 
@@ -38,8 +49,11 @@ workflows:
     jobs:
       - build
       - deploy:
+          # Only run deploy job if the build job has completed successfully
           requires:
             - build
+
+          # Only run the deploy job on dev branch
           filters:
             branches:
               only:
