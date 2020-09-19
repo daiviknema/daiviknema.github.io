@@ -25,6 +25,7 @@ jobs:
     steps:
       - checkout
       - download-dependencies
+      - run: npm install
       - run: npm run deploy_from_ci
 
 workflows:
