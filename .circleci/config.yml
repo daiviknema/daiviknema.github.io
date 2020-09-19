@@ -20,10 +20,6 @@ jobs:
       - run: npm install
       - run: gatsby build
   deploy:
-    filters:
-      branches:
-        only:
-          - dev
     docker:
       - image: "cimg/base:stable"
     steps:
@@ -35,4 +31,9 @@ workflows:
   build-and-deploy:
     jobs:
       - build
-      - deploy
+      - deploy:
+        filters:
+          branches:
+            only: dev
+        requires:
+          - build
