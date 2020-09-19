@@ -18,8 +18,21 @@ jobs:
       - checkout
       - download-dependencies
       - run: npm install
+      - run: gatsby build
+  deploy:
+    filters:
+      branches:
+        only:
+          - dev
+    docker:
+      - image: "cimg/base:stable"
+    steps:
+      - checkout
+      - download-dependencies
+      - run: npm run deploy_from_ci
 
 workflows:
   build-and-deploy:
     jobs:
       - build
+      - deploy
