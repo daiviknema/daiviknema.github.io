@@ -5,8 +5,6 @@ orbs:
 
 commands:
   download-dependencies:
-    docker:
-      - image: "cimg/base:stable"
     steps:
       - node/install
       - run: node --version
@@ -14,6 +12,8 @@ commands:
 
 jobs:
   build:
+    docker:
+      - image: "cimg/base:stable"
     steps:
       - checkout
       - download-dependencies
