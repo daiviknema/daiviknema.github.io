@@ -32,9 +32,9 @@ workflows:
     jobs:
       - build
       - deploy:
-        requires:
-          - build
-        filters:
-          branches:
-            only:
-              - dev
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - dev
