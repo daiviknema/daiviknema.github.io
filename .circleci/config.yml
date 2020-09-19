@@ -47,7 +47,12 @@ jobs:
 workflows:
   build-and-deploy:
     jobs:
-      - build
+      - build:
+          # Since master branch is only being used for site generation, we should not run build
+          filters:
+            branches:
+              ignore:
+                master
       - deploy:
           # Only run deploy job if the build job has completed successfully
           requires:
