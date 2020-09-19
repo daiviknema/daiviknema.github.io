@@ -1,0 +1,12 @@
+version: 2.1
+
+jobs:
+  do-nothing:
+    steps:
+      - run: echo "master branch is only for site generation"
+      - run: echo "please checkout dev branch for acive development"
+
+workflows:
+  empty-workflow:
+    jobs:
+      - do-nothing
