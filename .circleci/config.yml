@@ -1,6 +1,8 @@
 version: 2.1
 
 jobs:
+  docker:
+    - image: "cimg/base:stable"
   do-nothing:
     steps:
       - run: echo "master branch is only for site generation"
