@@ -1,9 +1,9 @@
 version: 2.1
 
 jobs:
-  docker:
-    - image: "cimg/base:stable"
   do-nothing:
+    docker:
+      - image: "cimg/base:stable"
     steps:
       - run: echo "master branch is only for site generation"
       - run: echo "please checkout dev branch for acive development"
