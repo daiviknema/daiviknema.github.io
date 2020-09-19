@@ -9,6 +9,10 @@ commands:
       - node/install
       - run: node --version
       - run: npm install -g gatsby-cli
+  set-git-config:
+    steps:
+      - run: git config --global user.name "circle-ci"
+      - run: git config --global user.email "circle-ci@daiviknema.github.io"
 
 jobs:
   build:
@@ -26,6 +30,7 @@ jobs:
       - checkout
       - download-dependencies
       - run: npm install
+      - set-git-config
       - run: npm run deploy_from_ci
 
 workflows:
