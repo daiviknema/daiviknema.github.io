@@ -1,5 +1,8 @@
 import React from "react"
 import Container from "../components/container"
+
+// This imports a CSS Module. All CSS files ending with ".module.css" are CSS Modules
+// This means that the styles defined in this stylesheet are only available to this module
 import userStyles from "../styles/user.module.css"
 
 const User = props => (
@@ -13,6 +16,12 @@ const User = props => (
 )
 
 export default () => {
+  // Uncomment the following line to see how the CSS Module is imported
+  // You will see that each class is a key in the object and the value 
+  // is a unique classname that CSS-Modules has generated
+  
+  // console.log(userStyles)
+  
   return (
     <Container>
       <h1>Hello, Gatsby!</h1>
