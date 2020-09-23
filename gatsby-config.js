@@ -58,12 +58,15 @@ module.exports = {
     // The following plugins are for bringing in and working with images on the site
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     //trackingId: `ADD YOUR TRACKING ID HERE`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: `UA-108266223-2`,
+        head: true,
+        anonymize: true,
+        respectDNT: true
+      },
+    },
     // `gatsby-plugin-feed`,
     {
       // Very cool plugin here!
