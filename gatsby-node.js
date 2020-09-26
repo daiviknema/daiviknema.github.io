@@ -1,11 +1,26 @@
 const { createFilePath } = require("gatsby-source-filesystem");
 const path = require("path");
 
+/**
+ * Gatsby calls this function when a new data node is created.
+ * Recall that in the Gatsby world, data is anything that resides
+ * outside a React component.
+ *
+ * @param { node, getNode, actions } param
+ */
 exports.onCreateNode = ({ node, getNode, actions }) => {
+  // createNodeFields will be used later on to assign extra
+  // fields/attributes to the node that is being created
   const { createNodeField } = actions;
+
+  // Our blog posts are all Mdx nodes. We want to assign a
+  // slug field for each of these nodes.
   if (node.internal.type === "Mdx") {
+    // createFilePath is a utility function we will
+    // use to generate the slug for the mdx node
     const slug = createFilePath({ node, getNode, basePath: "blog/" });
-    console.log(`Attaching slug ${slug} to node`);
+
+    // Add the slug field/attribute to the node
     createNodeField({
       node,
       name: `slug`,
@@ -14,9 +29,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   }
 };
 
+/**
+ * Method that is used to programmatically create pages from data
+ *
+ * @param { graphql, actions } param0
+ */
 exports.createPages = async ({ graphql, actions }) => {
-  // **Note:** The graphql function call returns a Promise
-  // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise for more info
+  // This query fetches all the Mdx blog posts. We will use
+  // the result of this query to create pages
   const result = await graphql(`
     query {
       allMdx {
@@ -31,8 +51,12 @@ exports.createPages = async ({ graphql, actions }) => {
   `);
 
   const { createPage } = actions;
+
+  // Create a page for each mdx node. createPage requires:
+  // 1. A slug (provided in the "path attribute")
+  // 2. A template that will render the page (this template takes our mdx node as input to fill in the data)
+  // 3. A context. This specifies the variables which will be available in the apge query of the template
   result.data.allMdx.nodes.forEach(node => {
-    console.log(`Node: ${JSON.stringify(node)}`);
     createPage({
       path: node.fields.slug,
       component: path.resolve(`./src/templates/blog-post.js`),
