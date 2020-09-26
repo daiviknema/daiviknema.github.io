@@ -66,13 +66,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
-    // This plugin provides typography. We will use Material UIs typography
-    // {
-    //   resolve: `gatsby-plugin-typography`,
-    //   options: {
-    //     pathToConfigModule: `src/utils/typography`,
-    //   },
-    // },
     `gatsby-theme-material-ui`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
