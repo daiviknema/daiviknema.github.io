@@ -30,31 +30,13 @@ module.exports = {
         name: `assets`,
       },
     },
+    // MDX support (Ie. adding JSX components to Markdown)
     {
-      // Transformer plugin to convert markdown files into html
-      // Generates allMarkDownRemark and markdownRemark nodes
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 590,
-            },
-          },
-          {
-            resolve: `gatsby-remark-responsive-iframe`,
-            options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
-            },
-          },
-          `gatsby-remark-prismjs`,
-          `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`,
-        ],
-      },
+        extenstions: [`.mdx`, `.md`],
+      }
     },
-
     // The following plugins are for bringing in and working with images on the site
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
