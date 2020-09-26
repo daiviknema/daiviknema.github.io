@@ -1,114 +1,68 @@
-const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const { createFilePath } = require("gatsby-source-filesystem");
+const path = require("path");
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions
+/**
+ * Gatsby calls this function when a new data node is created.
+ * Recall that in the Gatsby world, data is anything that resides
+ * outside a React component.
+ *
+ * @param { node, getNode, actions } param
+ */
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  // createNodeFields will be used later on to assign extra
+  // fields/attributes to the node that is being created
+  const { createNodeField } = actions;
 
-  // Define a template for blog post
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
+  // Our blog posts are all Mdx nodes. We want to assign a
+  // slug field for each of these nodes.
+  if (node.internal.type === "Mdx") {
+    // createFilePath is a utility function we will
+    // use to generate the slug for the mdx node
+    const slug = createFilePath({ node, getNode, basePath: "blog/" });
 
-  // Get all markdown blog posts sorted by date
-  const result = await graphql(
-    `
-      {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: DESC }
-          limit: 1000
-        ) {
-          nodes {
-            fields {
-              slug
-            }
-            frontmatter {
-              title
-            }
+    // Add the slug field/attribute to the node
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    });
+  }
+};
+
+/**
+ * Method that is used to programmatically create pages from data
+ *
+ * @param { graphql, actions } param0
+ */
+exports.createPages = async ({ graphql, actions }) => {
+  // This query fetches all the Mdx blog posts. We will use
+  // the result of this query to create pages
+  const result = await graphql(`
+    query {
+      allMdx {
+        nodes {
+          fields {
+            slug
           }
+          id
         }
       }
-    `
-  )
-
-  if (result.errors) {
-    reporter.panicOnBuild(`There was an error loading your blog posts`, result.errors)
-    return
-  }
-
-  const posts = result.data.allMarkdownRemark.nodes
-
-  // Create blog posts pages
-  // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
-  // `context` is available in the template as a prop and as a variable in GraphQL
-
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previous = index === posts.length - 1 ? null : posts[index + 1]
-      const next = index === 0 ? null : posts[index - 1]
-
-      createPage({
-        path: post.fields.slug,
-        component: blogPost,
-        context: {
-          slug: post.fields.slug,
-          previous,
-          next,
-        },
-      })
-    })
-  }
-}
-
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
-
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    })
-  }
-}
-
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
-
-  // Explicitly define the siteMetadata {} object
-  // This way those will always be defined even if removed from gatsby-config.js
-
-  // Also explicitly define the Markdown frontmatter
-  // This way the "MarkdownRemark" queries will return `null` even when no
-  // blog posts are stored inside "content/blog" instead of returning an error
-  createTypes(`
-    type SiteSiteMetadata {
-      author: Author
-      siteUrl: String
-      social: Social
     }
+  `);
 
-    type Author {
-      name: String
-      summary: String
-    }
+  const { createPage } = actions;
 
-    type Social {
-      twitter: String
-    }
-
-    type MarkdownRemark implements Node {
-      frontmatter: Frontmatter
-      fields: Fields
-    }
-
-    type Frontmatter {
-      title: String
-      description: String
-      date: Date @dateformat
-    }
-
-    type Fields {
-      slug: String
-    }
-  `)
-}
+  // Create a page for each mdx node. createPage requires:
+  // 1. A slug (provided in the "path attribute")
+  // 2. A template that will render the page (this template takes our mdx node as input to fill in the data)
+  // 3. A context. This specifies the variables which will be available in the apge query of the template
+  result.data.allMdx.nodes.forEach(node => {
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve(`./src/templates/blog-post.js`),
+      context: {
+        id: node.id,
+      },
+    });
+  });
+};
