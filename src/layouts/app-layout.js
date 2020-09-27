@@ -1,17 +1,14 @@
 import React from "react";
-import { ThemeProvider } from "@material-ui/core/styles";
-import { theme } from "../gatsby-theme-material-ui-top-layout/theme";
 import { Container } from "@material-ui/core";
-import MainNav from "../components/main-nav";
+import MainNav from "../components/main-nav/main-nav";
+import styles from './app-layout.module.css';
 
 const AppLayout = ({ children }) => {
   return (
-    <ThemeProvider theme={theme}>
-      <Container>
-        <MainNav />
-        {children}
-      </Container>
-    </ThemeProvider>
+    <Container className={styles.container}>
+      <MainNav />
+      {children}
+    </Container>
   );
 };
 

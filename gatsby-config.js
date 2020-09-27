@@ -35,7 +35,7 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extenstions: [`.mdx`, `.md`],
-      }
+      },
     },
     // The following plugins are for bringing in and working with images on the site
     `gatsby-transformer-sharp`,
@@ -46,7 +46,7 @@ module.exports = {
         trackingId: `UA-108266223-2`,
         head: true,
         anonymize: true,
-        respectDNT: true
+        respectDNT: true,
       },
     },
     // `gatsby-plugin-feed`,
@@ -66,7 +66,39 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
-    `gatsby-theme-material-ui`,
+    {
+      resolve: `gatsby-theme-material-ui`,
+      options: {
+        webFontsConfig: {
+          fonts: {
+            google: [
+              {
+                family: "Raleway",
+                variants: [
+                  "100",
+                  "200",
+                  "300",
+                  "400",
+                  "500",
+                  "600",
+                  "700",
+                  "800",
+                  "900",
+                ],
+              },
+              {
+                family: `Montserrat`,
+                variants: [`300`, `400`, `500`],
+              },
+              {
+                family: `Oswald`,
+                variants: [`300`, `400`, `500`]
+              }
+            ],
+          },
+        },
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
