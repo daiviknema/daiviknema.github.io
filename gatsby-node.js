@@ -18,7 +18,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   if (node.internal.type === "Mdx") {
     // createFilePath is a utility function we will
     // use to generate the slug for the mdx node
-    const slug = createFilePath({ node, getNode, basePath: "blog/" });
+    const slug = `blog${createFilePath({ node, getNode, basePath: "blog/" })}`;
 
     // Add the slug field/attribute to the node
     createNodeField({

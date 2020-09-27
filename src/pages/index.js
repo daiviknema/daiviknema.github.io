@@ -1,24 +1,12 @@
 import React from "react";
 import { graphql } from "gatsby";
+import AppLayout from "../layouts/app-layout";
 
-import Bio from "../components/bio";
-import SEO from "../components/seo";
-
-const BlogIndex = ({ data, location }) => {
-  return (
-    <div>
-      <SEO title="All posts" />
-      <Bio />
-      <p>
-        No blog posts found. Add markdown posts to "content/blog" (or the
-        directory you specified for the "gatsby-source-filesystem" plugin in
-        gatsby-config.js).
-      </p>
-    </div>
-  );
+const App = ({ data, location }) => {
+  return <AppLayout>This is the home page</AppLayout>;
 };
 
-export default BlogIndex;
+export default App;
 
 export const pageQuery = graphql`
   query {
