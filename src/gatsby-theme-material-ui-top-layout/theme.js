@@ -1,7 +1,13 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import _ from "lodash";
+import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import blueGrey from "@material-ui/core/colors/blueGrey";
+import constants from "../constants/constants";
 
 let theme = createMuiTheme({
+  breakpoints: {
+    keys: _.keys(constants.BREAKPOINTS),
+    values: constants.BREAKPOINTS,
+  },
   palette: {
     type: "dark",
     primary: {
@@ -13,25 +19,20 @@ let theme = createMuiTheme({
       primary: blueGrey[50],
     },
   },
-  //   typography: {
-  //     fontFamily: ["Raleway", "sans-serif"].join(","),
-  //   },
   typography: {
     h1: {
       fontFamily: "Oswald",
       fontWeight: 300,
-      fontSize: "6rem",
-      lineHeight: 1.167,
       letterSpacing: "-0.01562em",
     },
-    h4: {
+    h5: {
       fontFamily: "Montserrat",
       fontWeight: 400,
-      fontSize: "2.125rem",
-      lineHeight: 1.235,
       letterSpacing: "-0.05em",
     },
   },
 });
+
+theme = responsiveFontSizes(theme);
 
 export default theme;

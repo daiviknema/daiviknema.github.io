@@ -69,8 +69,12 @@ const SEO = ({ description, lang, meta, title, overrideTitleTemplate }) => {
         },
         {
           name: `google-site-verification`,
-          content: `iKiePvcjEBo-1FPmsaPO87NiB7rJ24O8WvQQ-hCRnro`
-        }
+          content: `iKiePvcjEBo-1FPmsaPO87NiB7rJ24O8WvQQ-hCRnro`,
+        },
+        {
+          name: `viewport`,
+          content: `width=device-width, initial-scale=1`,
+        },
       ].concat(meta)}
     />
   );

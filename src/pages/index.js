@@ -14,7 +14,7 @@ const App = ({ data, location }) => {
     <AppLayout>
       <Container className={styles.container} style={{ textAlign: "center" }}>
         <Grid container alignItems="center" justify="center">
-          <Grid item xs={4}>
+          <Grid item xs={12}>
             <Container className={styles.imgContainer}>
               <Img
                 fixed={avatar}
@@ -24,7 +24,7 @@ const App = ({ data, location }) => {
             </Container>
           </Grid>
 
-          <Grid item xs={8}>
+          <Grid item xs={12}>
             <Container className={styles.textContainer}>
               <Typography>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
