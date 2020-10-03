@@ -6,37 +6,94 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import styles from "./styles/index.module.css";
 import { Typography } from "@material-ui/core";
+import Emoji from "../components/emoji/emoji";
+import { Link } from "gatsby-theme-material-ui";
+import { LinkedIn, GitHub, Instagram } from "@material-ui/icons";
 
-const App = ({ data, location }) => {
-  console.log(data);
-  const avatar = data?.avatar?.childImageSharp?.fixed;
+const SocialMediaIconsGrid = ({ linkedinUrl, instagramUrl, githubUrl }) => {
+  return (
+    <Container className={styles.socialMediaIconsGrid}>
+      <Grid container alignItems="center" justify="center">
+        {linkedinUrl && <Grid item xs={4}>
+          <Link
+            target="_blank"
+            href={linkedinUrl}
+            color="textPrimary"
+          >
+            <LinkedIn />
+          </Link>
+        </Grid>}
+        {instagramUrl && <Grid item xs={4}>
+          <Link
+            target={`${githubUrl && "_blank"}`}
+            href={`${"#" && githubUrl}`}
+            color="textPrimary"
+          >
+            <GitHub />
+          </Link>
+        </Grid>}
+        {instagramUrl && <Grid item xs={4}>
+          <Link
+            target={`${instagramUrl && "_blank"}`}
+            href={`${"#" && instagramUrl}`}
+            color="textPrimary"
+          >
+            <Instagram />
+          </Link>
+        </Grid>}
+      </Grid>
+    </Container>
+  );
+};
+
+const App = ({ data }) => {
+  const avatarFluid = data?.avatar?.childImageSharp?.fluid;
+  const {
+    instagram,
+    linkedin,
+    github,
+  } = data?.site?.siteMetadata?.author?.social;
   return (
     <AppLayout>
       <Container className={styles.container} style={{ textAlign: "center" }}>
         <Grid container alignItems="center" justify="center">
-          <Grid item xs={12}>
+          <Grid item xs={12} md={4}>
             <Container className={styles.imgContainer}>
               <Img
-                fixed={avatar}
+                fluid={avatarFluid}
                 alt="Profile image here"
-                imgStyle={{ objectFit: "contain" }}
+                imgStyle={{ border: "5px solid", borderRadius: "50%" }}
+              />
+              <SocialMediaIconsGrid
+                instagramUrl={instagram?.profileUrl}
+                githubUrl={github?.profileUrl}
+                linkedinUrl={linkedin?.profileUrl}
               />
             </Container>
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid item xs={12} md={8}>
             <Container className={styles.textContainer}>
-              <Typography>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum
+              <Typography variant="body1" paragraph>
+                Hi there! Welcome to my little corner on the interweb{"  "}
+                <Emoji label="fire" symbol="🔥" />
+              </Typography>
+              <Typography variant="body1" paragraph>
+                Just your garden variety full stack developer and Vim zealot
+                (Emacs GTFO). I enjoy building new stuff and keeping up to date
+                on the latest web technologies. Currently I'm found obsessiong
+                over{" "}
+                <Link href="https://www.gatsbyjs.com/" target="_blank">
+                  Gatsby
+                </Link>
+                , which is what I've used to build this website! Go check it
+                out, it is supercool{"  "}
+                <Emoji label="cat-with-heart-eyes" symbol="😻" />
+              </Typography>
+              <Typography variant="body1" paragraph>
+                Find out more about me <Link href="/about">here</Link> and check
+                out some of my <Link href="/blog">blog posts</Link> and{" "}
+                <Link href="/projects">projects</Link>!
               </Typography>
             </Container>
           </Grid>
@@ -53,12 +110,28 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        author {
+          social {
+            instagram {
+              username
+              profileUrl
+            }
+            linkedin {
+              username
+              profileUrl
+            }
+            github {
+              username
+              profileUrl
+            }
+          }
+        }
       }
     }
-    avatar: file(absolutePath: { regex: "/profile-pic-autocrop.png/" }) {
+    avatar: file(absolutePath: { regex: "/logo-final.png/" }) {
       childImageSharp {
-        fixed(width: 230, height: 340) {
-          ...GatsbyImageSharpFixed
+        fluid(maxWidth: 2600, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
         }
       }
     }

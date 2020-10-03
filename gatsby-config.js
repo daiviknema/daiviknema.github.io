@@ -4,12 +4,23 @@ module.exports = {
     author: {
       name: `Daivik Nema`,
       summary: `who makes things work on his machine (most of the time)`,
+      social: {
+        instagram: {
+          profileUrl: `https://www.instagram.com/code.or.die/`,
+          username: `@code.or.die`
+        },
+        linkedin: {
+          profileUrl: `https://in.linkedin.com/public-profile/in/daivik-nema-3bb44114a`,
+          username: `Daivik Nema`
+        },
+        github: {
+          profileUrl: `https://github.com/daiviknema`,
+          username: `daiviknema`
+        }
+      },
     },
     description: ``,
     siteUrl: `https://daiviknema.github.io/`,
-    // social: {
-    //   twitter: `kylemathews`,
-    // },
   },
   plugins: [
     {
@@ -56,13 +67,13 @@ module.exports = {
       // Ie. the ability to "install" the website and use it as if it were a natively installed app
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Daivik's Personal Home Page`,
-        short_name: `Daivik Home`,
+        name: `Daivik's Personal Website`,
+        short_name: `Daivik Nema`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/profile-pic-autocrop.png`,
+        icon: `content/assets/logo-final.png`,
       },
     },
     `gatsby-plugin-react-helmet`,

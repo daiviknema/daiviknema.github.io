@@ -25,11 +25,16 @@ let theme = createMuiTheme({
       fontWeight: 300,
       letterSpacing: "-0.01562em",
     },
-    h5: {
+    h6: {
       fontFamily: "Montserrat",
       fontWeight: 400,
       letterSpacing: "-0.05em",
     },
+    body1: {
+      fontFamily: "Raleway",
+      fontWeight: 400,
+      letterSpacing: "-0.01em",
+    }
   },
 });
 

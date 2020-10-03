@@ -10,3 +10,11 @@
 .textContainer {
     text-align: left;
 }
+
+.socialMediaIcon {
+    color: inherit;
+}
+
+.socialMediaIconsGrid {
+    padding: 1rem;
+}

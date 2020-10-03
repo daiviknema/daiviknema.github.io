@@ -7,7 +7,7 @@ import mainNavStyles from "./main-nav.module.css";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Drawer from "@material-ui/core/Drawer";
-import { Button } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -87,19 +87,19 @@ const MainNavForXsToSmDevice = ({ site }) => {
 const MainNavForMdToXlDevice = ({ site }) => {
   return (
     <Grid container alignItems="baseline">
-      <Grid item md={5}>
+      <Grid item md={6}>
         <Link underline="none" href="/">
           <Typography color="textPrimary" variant="h1">
             {site.siteMetadata.title}
           </Typography>
         </Link>
       </Grid>
-      <Grid item md={3} />
+      <Grid item md={2} />
       {navTargets.map(navTarget => {
         return (
           <Grid item md={1} className={mainNavStyles.navItem}>
             <Link underline="none" href={navTarget.href}>
-              <Typography color="textPrimary" variant="h5">
+              <Typography color="textPrimary" variant="h6">
                 {navTarget.name}
               </Typography>
             </Link>
