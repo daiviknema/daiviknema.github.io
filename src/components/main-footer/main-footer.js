@@ -15,7 +15,10 @@ const MainFooterForXsToSmScreen = ({ gatsbyLogo, githubLogo }) => {
         <Grid item xs={12}>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Typography variant="caption">
-              Built with <Link href="https://www.gatsbyjs.com/">GatsbyJS</Link>{" "}
+              Built with{" "}
+              <Link target="_blank" href="https://www.gatsbyjs.com/">
+                GatsbyJS
+              </Link>{" "}
             </Typography>
             <div style={{ paddingLeft: "0.3em", paddingRight: "0.3em" }}>
               <Img fixed={gatsbyLogo} />
@@ -27,7 +30,9 @@ const MainFooterForXsToSmScreen = ({ gatsbyLogo, githubLogo }) => {
             <Typography variant="caption">
               {" "}
               Hosted on{" "}
-              <Link href="https://pages.github.com/">Github Pages</Link>{" "}
+              <Link target="_blank" href="https://pages.github.com/">
+                Github Pages
+              </Link>{" "}
             </Typography>
             <div style={{ paddingLeft: "0.3em", paddingRight: "0.3em" }}>
               <Img fixed={githubLogo} />

@@ -55,7 +55,7 @@ const App = ({ data }) => {
   } = data?.site?.siteMetadata?.author?.social;
   return (
     <AppLayout>
-      <Container className={styles.container} style={{ textAlign: "center" }}>
+      <Container className={styles.container}>
         <Grid container alignItems="center" justify="center">
           <Grid item xs={12} md={4}>
             <Container className={styles.imgContainer}>

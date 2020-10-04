@@ -1,8 +1,13 @@
 import React from "react";
 import AppLayout from "../layouts/app-layout";
+import UnderConstruction from "../components/under-construction/under-construction";
 
 const ProjectsPage = () => {
-  return <AppLayout>This is the projects page</AppLayout>;
+  return (
+    <AppLayout>
+      <UnderConstruction />
+    </AppLayout>
+  );
 };
 
 export default ProjectsPage;
