@@ -1,0 +1,20 @@
+.container {
+    padding: 0.1rem;
+}
+
+.imgContainer {
+    padding: 2rem;
+    text-align: center;
+}
+
+.textContainer {
+    text-align: left;
+}
+
+.socialMediaIcon {
+    color: inherit;
+}
+
+.socialMediaIconsGrid {
+    padding: 1rem;
+}

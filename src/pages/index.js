@@ -1,89 +1,139 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
+import React from "react";
+import { graphql } from "gatsby";
+import Img from "gatsby-image";
+import AppLayout from "../layouts/app-layout";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import styles from "./styles/index.module.css";
+import { Typography } from "@material-ui/core";
+import Emoji from "../components/emoji/emoji";
+import { Link } from "gatsby-theme-material-ui";
+import { LinkedIn, GitHub, Instagram } from "@material-ui/icons";
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
-
-const BlogIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
-
-  if (posts.length === 0) {
-    return (
-      <Layout location={location} title={siteTitle}>
-        <SEO title="All posts" />
-        <Bio />
-        <p>No blog posts found. Add markdown posts to "content/blog" (or the directory you specified for the "gatsby-source-filesystem" plugin in gatsby-config.js).</p>
-      </Layout>
-    )
-  }
-
+const SocialMediaIconsGrid = ({ linkedinUrl, instagramUrl, githubUrl }) => {
   return (
-    <Layout location={location} title={siteTitle}>
-      <SEO title="All posts" />
-      <Bio />
-      {posts.map((post) => {
-        const title = post.frontmatter.title || post.fields.slug
-        return (
-          <article
-            key={post.fields.slug}
-            itemScope
-            itemType="http://schema.org/Article"
+    <Container className={styles.socialMediaIconsGrid}>
+      <Grid container alignItems="center" justify="center">
+        {linkedinUrl && <Grid item xs={4}>
+          <Link
+            target="_blank"
+            href={linkedinUrl}
+            color="textPrimary"
           >
-            <header>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link
-                  style={{ boxShadow: `none` }}
-                  to={post.fields.slug}
-                  itemProp="url"
-                >
-                  <span itemProp="headline">{title}</span>
-                </Link>
-              </h3>
-              <small>{post.frontmatter.date}</small>
-            </header>
-            <section>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: post.frontmatter.description || post.excerpt,
-                }}
-                itemProp="description"
-              />
-            </section>
-          </article>
-        )
-      })}
-    </Layout>
-  )
-}
+            <LinkedIn />
+          </Link>
+        </Grid>}
+        {instagramUrl && <Grid item xs={4}>
+          <Link
+            target={`${githubUrl && "_blank"}`}
+            href={`${"#" && githubUrl}`}
+            color="textPrimary"
+          >
+            <GitHub />
+          </Link>
+        </Grid>}
+        {instagramUrl && <Grid item xs={4}>
+          <Link
+            target={`${instagramUrl && "_blank"}`}
+            href={`${"#" && instagramUrl}`}
+            color="textPrimary"
+          >
+            <Instagram />
+          </Link>
+        </Grid>}
+      </Grid>
+    </Container>
+  );
+};
 
-export default BlogIndex
+const App = ({ data }) => {
+  const avatarFluid = data?.avatar?.childImageSharp?.fluid;
+  const {
+    instagram,
+    linkedin,
+    github,
+  } = data?.site?.siteMetadata?.author?.social;
+  return (
+    <AppLayout>
+      <Container className={styles.container}>
+        <Grid container alignItems="center" justify="center">
+          <Grid item xs={12} md={4}>
+            <Container className={styles.imgContainer}>
+              <Img
+                fluid={avatarFluid}
+                alt="Profile image here"
+                imgStyle={{ border: "5px solid", borderRadius: "50%" }}
+              />
+              <SocialMediaIconsGrid
+                instagramUrl={instagram?.profileUrl}
+                githubUrl={github?.profileUrl}
+                linkedinUrl={linkedin?.profileUrl}
+              />
+            </Container>
+          </Grid>
+
+          <Grid item xs={12} md={8}>
+            <Container className={styles.textContainer}>
+              <Typography variant="body1" paragraph>
+                Hi there! Welcome to my little corner on the interweb{"  "}
+                <Emoji label="fire" symbol="🔥" />
+              </Typography>
+              <Typography variant="body1" paragraph>
+                Just your garden variety full stack developer and Vim zealot
+                (Emacs GTFO). I enjoy building new stuff and keeping up to date
+                on the latest web technologies. Currently I'm found obsessiong
+                over{" "}
+                <Link href="https://www.gatsbyjs.com/" target="_blank">
+                  Gatsby
+                </Link>
+                , which is what I've used to build this website! Go check it
+                out, it is supercool{"  "}
+                <Emoji label="cat-with-heart-eyes" symbol="😻" />
+              </Typography>
+              <Typography variant="body1" paragraph>
+                Find out more about me <Link href="/about">here</Link> and check
+                out some of my <Link href="/blog">blog posts</Link> and{" "}
+                <Link href="/projects">projects</Link>!
+              </Typography>
+            </Container>
+          </Grid>
+        </Grid>
+      </Container>
+    </AppLayout>
+  );
+};
+
+export default App;
 
 export const pageQuery = graphql`
   query {
     site {
       siteMetadata {
         title
+        author {
+          social {
+            instagram {
+              username
+              profileUrl
+            }
+            linkedin {
+              username
+              profileUrl
+            }
+            github {
+              username
+              profileUrl
+            }
+          }
+        }
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      nodes {
-        excerpt
-        fields {
-          slug
-        }
-        frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          title
-          description
+    avatar: file(absolutePath: { regex: "/logo-final.png/" }) {
+      childImageSharp {
+        fluid(maxWidth: 2600, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
         }
       }
     }
   }
-`
+`;
