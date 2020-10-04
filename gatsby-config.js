@@ -60,7 +60,7 @@ module.exports = {
         respectDNT: true,
       },
     },
-    // `gatsby-plugin-feed`,
+    `gatsby-plugin-feed`,
     {
       // Very cool plugin here!
       // Allows "Add to Home Page" functionality on mobile browsers
