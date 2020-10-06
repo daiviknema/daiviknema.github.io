@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
-import AppLayout from "../layouts/app-layout";
+import AppLayout from "../layouts/app-layout/app-layout";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import styles from "./styles/index.module.css";
