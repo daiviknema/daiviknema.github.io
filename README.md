@@ -1,99 +1,81 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
+<h1 align="center"> Daivik's Personal Website </h1> <br>
 <p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
+  <a href="https://daiviknema.github.io/">
+    <img alt="Daivik Nema" title="Daivik Nema" src="content/assets/logo-final.png" width="300">
   </a>
 </p>
-<h1 align="center">
-  Gatsby's blog starter
-</h1>
 
-Kick off your project with this blog boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+## Table of Contents
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+- [Introduction](#introduction)
+- [Running the site locally](#setting-up-a-development-environment-and-running-the-site-locally)
+- [CircleCI setup](#circleci-setup)
+- [Found Issues? Got Feedback?](#found-issues-got-feedback)
+- [License](#license)
 
-## 🚀 Quick start
 
-1.  **Create a Gatsby site.**
+## Introduction
 
-    Use the Gatsby CLI to create a new site, specifying the blog starter.
+[![daiviknema](https://circleci.com/gh/daiviknema/daiviknema.github.io.svg?style=shield)](https://app.circleci.com/pipelines/github/daiviknema/daiviknema.github.io)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/daiviknema/daiviknema.github.io?style=flat)](https://github.com/daiviknema/daiviknema.github.io/tags)
+[![GitHub issues](https://img.shields.io/github/issues-raw/daiviknema/daiviknema.github.io?style=flat)](https://github.com/daiviknema/daiviknema.github.io/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/daiviknema/daiviknema.github.io)](https://github.com/daiviknema/daiviknema.github.io/pulls)
+[![License](https://img.shields.io/github/license/daiviknema/daiviknema.github.io.svg)](license.txt)
+
+This repository contains the source code for [my personal website](https://daiviknema.github.io) which hosts my [blog](https://daiviknema.github.io/blog) and [resume](https://daiviknema.github.io/about). The website is built using the [Gatsby](https://www.gatsbyjs.com) frontend framework; and I have also used the [Material UI](https://material-ui.com) library to design the layouts and for various other components. The website is still WIP, but once I've added a few more functionalities I do plan on publishing it (or atleast a sightly modified version of it) as a starter on the official Gatsby website. For now, anyone who wishes to copy or modify this code for their own use is welcome to do so (please see the [LICENSE](LICENSE) and copyright notice for complete details)
+
+## Setting up a development environment and running the site locally
+
+1.  **Make sure you have a relatively recent version of node and npm installed**
+
+    Binaries for node (including npm) can be found [here](https://nodejs.org/en/download/). If you're on Ubuntu, I've found that the package manager version of Node/NPM is a little out of date, so I prefer to install via the binary archive. Instructions for the same can be found [here](https://github.com/nodejs/help/wiki/Installation)
+
+2.  **Install gatsby-cli**
+
+    On a terminal execute the following:
 
     ```shell
-    # create a new Gatsby site using the blog starter
-    gatsby new my-blog-starter https://github.com/gatsbyjs/gatsby-starter-blog
+    npm install -g gatsby-cli
     ```
 
-1.  **Start developing.**
+3.  **Clone the source code**
 
-    Navigate into your new site’s directory and start it up.
-
+    On a terminal, execute:
+    
     ```shell
-    cd my-blog-starter/
-    gatsby develop
+    git clone https://github.com/daiviknema/daiviknema.github.io
     ```
 
-1.  **Open the source code and start editing!**
+4.  **Install node modules**
 
-    Your site is now running at `http://localhost:8000`!
+    Change directories into the cloned repo (eg `cd daiviknema.github.io/`) and execute:
+    
+    ```shell
+    npm install
+    ```
+    
+    This will install all the dependencies (such as Material-UI and other Gatsby plugins into a directory called `node_modules/`)
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql)._
+5.  **Deploy the site**
+    
+    The development server can be started by running `gatsby develop` from the command line. Note that this deploys a development bundle on `localhost:8000`. This is ideal if you are looking to modify the code.
+    
+    For a production bundle (with minified CSS and obfuscated JS), you will need to execute:
+    ```shell
+    gatsby build
+    gatsby serve
+    ```
+    
+    This will deploy your site to `localhost:9000`
 
-    Open the `my-blog-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+## CircleCI Setup
 
-## 🧐 What's inside?
+The website is hosted on [Github Pages](https://pages.github.com/) - which requires that the static site be deployed from the `master` branch. Because of this constraint, I've updated the default branch on this repo to be `dev` instead of `master`. I've set up [CircleCI](https://circleci.com/) on this repository to perform a build on every commit push; however, deployment is only performed when commits are pushed/merged to the `dev` branch. That is, when a commit is pushed/merged to `dev` branch, CircleCI performs a build and pushes the build output (`public/` directory) to `master` branch - where GH pages can pick it up. Please take a look at `.circleci/config.yml` for the exact specification of the build and deploy steps. 
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+## Found Issues? Got Feedback?
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
+I've tried my best to make the website experience as nice and bug-free as possible for the viewers, but I'm hardly above the universal truth that **all code that does anything useful has bugs**. In case you've found one, please do let me know by [raising an issue](https://github.com/daiviknema/daiviknema.github.io/issues/new). Alternatively, if you have any feedback for me, feel free to raise an issue as well! 
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+## License
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
-
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
-
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
-
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.com/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
-
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.com/docs/gatsby-config/) for more detail).
-
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.com/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
-
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.com/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
-
-9.  **`LICENSE`**: This Gatsby starter is licensed under the 0BSD license. This means that you can see this file as a placeholder and replace it with your own license.
-
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
-
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
-
-12. **`README.md`**: A text file containing useful reference information about your project.
-
-## 🎓 Learning Gatsby
-
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
-
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-blog)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gatsbyjs/gatsby-starter-blog)
-
-<!-- AUTO-GENERATED-CONTENT:END -->
+The code in this repository is licensed under the [MIT license](LICENSE)
