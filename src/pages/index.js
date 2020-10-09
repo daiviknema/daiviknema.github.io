@@ -3,46 +3,64 @@ import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import AppLayout from "../layouts/app-layout";
 import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import styles from "./styles/index.module.css";
+import styled from "styled-components";
 import { Typography } from "@material-ui/core";
 import Emoji from "../components/emoji/emoji";
 import { Link } from "gatsby-theme-material-ui";
 import { LinkedIn, GitHub, Instagram } from "@material-ui/icons";
 
+const IndexPageContainer = styled.div`
+  padding: 0.1rem;
+`;
+
+const ImgContainer = styled.div`
+  padding: 2rem;
+  text-align: center;
+`;
+
+const TextContainer = styled.div`
+  text-align: left;
+`;
+
+const SocialMediaIconsGridContainer = styled.div`
+  padding: 1rem;
+`;
+
 const SocialMediaIconsGrid = ({ linkedinUrl, instagramUrl, githubUrl }) => {
   return (
-    <Container className={styles.socialMediaIconsGrid}>
+    <SocialMediaIconsGridContainer>
       <Grid container alignItems="center" justify="center">
-        {linkedinUrl && <Grid item xs={4}>
-          <Link
-            target="_blank"
-            href={linkedinUrl}
-            color="textPrimary"
-          >
-            <LinkedIn />
-          </Link>
-        </Grid>}
-        {instagramUrl && <Grid item xs={4}>
-          <Link
-            target={`${githubUrl && "_blank"}`}
-            href={`${"#" && githubUrl}`}
-            color="textPrimary"
-          >
-            <GitHub />
-          </Link>
-        </Grid>}
-        {instagramUrl && <Grid item xs={4}>
-          <Link
-            target={`${instagramUrl && "_blank"}`}
-            href={`${"#" && instagramUrl}`}
-            color="textPrimary"
-          >
-            <Instagram />
-          </Link>
-        </Grid>}
+        {linkedinUrl && (
+          <Grid item xs={4}>
+            <Link target="_blank" href={linkedinUrl} color="textPrimary">
+              <LinkedIn />
+            </Link>
+          </Grid>
+        )}
+        {instagramUrl && (
+          <Grid item xs={4}>
+            <Link
+              target={`${githubUrl && "_blank"}`}
+              href={`${"#" && githubUrl}`}
+              color="textPrimary"
+            >
+              <GitHub />
+            </Link>
+          </Grid>
+        )}
+        {instagramUrl && (
+          <Grid item xs={4}>
+            <Link
+              target={`${instagramUrl && "_blank"}`}
+              href={`${"#" && instagramUrl}`}
+              color="textPrimary"
+            >
+              <Instagram />
+            </Link>
+          </Grid>
+        )}
       </Grid>
-    </Container>
+    </SocialMediaIconsGridContainer>
   );
 };
 
@@ -55,10 +73,10 @@ const App = ({ data }) => {
   } = data?.site?.siteMetadata?.author?.social;
   return (
     <AppLayout>
-      <Container className={styles.container}>
+      <IndexPageContainer>
         <Grid container alignItems="center" justify="center">
           <Grid item xs={12} md={4}>
-            <Container className={styles.imgContainer}>
+            <ImgContainer>
               <Img
                 fluid={avatarFluid}
                 alt="Profile image here"
@@ -69,11 +87,11 @@ const App = ({ data }) => {
                 githubUrl={github?.profileUrl}
                 linkedinUrl={linkedin?.profileUrl}
               />
-            </Container>
+            </ImgContainer>
           </Grid>
 
           <Grid item xs={12} md={8}>
-            <Container className={styles.textContainer}>
+            <TextContainer>
               <Typography variant="body1" paragraph>
                 Hi there! Welcome to my little corner on the interweb{"  "}
                 <Emoji label="fire" symbol="🔥" />
@@ -95,10 +113,10 @@ const App = ({ data }) => {
                 out some of my <Link href="/blog">blog posts</Link> and{" "}
                 <Link href="/projects">projects</Link>!
               </Typography>
-            </Container>
+            </TextContainer>
           </Grid>
         </Grid>
-      </Container>
+      </IndexPageContainer>
     </AppLayout>
   );
 };

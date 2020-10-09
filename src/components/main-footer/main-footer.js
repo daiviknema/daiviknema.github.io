@@ -3,14 +3,23 @@ import { Link } from "gatsby-theme-material-ui";
 import Img from "gatsby-image";
 import { graphql, useStaticQuery } from "gatsby";
 import Typography from "@material-ui/core/Typography";
-import styles from "./main-footer.module.css";
 import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import useTheme from "@material-ui/styles/useTheme";
+import styled from "styled-components";
+
+const StyledFooter = styled.footer`
+  justify-content: center;
+  line-height: 24px;
+  display: flex;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  width: 100%;
+`;
 
 const MainFooterForXsToSmScreen = ({ gatsbyLogo, githubLogo }) => {
   return (
-    <footer className={styles.footer}>
+    <StyledFooter>
       <Grid container>
         <Grid item xs={12}>
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -40,13 +49,13 @@ const MainFooterForXsToSmScreen = ({ gatsbyLogo, githubLogo }) => {
           </div>
         </Grid>
       </Grid>
-    </footer>
+    </StyledFooter>
   );
 };
 
 const MainFooterForMdToLgScreen = ({ gatsbyLogo, githubLogo }) => {
   return (
-    <footer className={styles.footer}>
+    <StyledFooter>
       <Grid container>
         <Grid item xs={12}>
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -67,7 +76,7 @@ const MainFooterForMdToLgScreen = ({ gatsbyLogo, githubLogo }) => {
           </div>
         </Grid>
       </Grid>
-    </footer>
+    </StyledFooter>
   );
 };
 
