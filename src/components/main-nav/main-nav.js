@@ -3,7 +3,6 @@ import { graphql, useStaticQuery } from "gatsby";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "gatsby-theme-material-ui";
-import mainNavStyles from "./main-nav.module.css";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Drawer from "@material-ui/core/Drawer";
@@ -12,6 +11,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
+import styled from "styled-components";
 
 const navTargets = [
   {
@@ -28,6 +28,14 @@ const navTargets = [
   },
 ];
 
+const DrawerItem = styled.div`
+  min-width: 17rem;
+
+  @media screen and (min-width: 600px) {
+    min-width: 20rem;
+  }
+`;
+
 const MainNavForXsToSmDevice = ({ site }) => {
   const [state, setState] = React.useState({
     showDrawer: false,
@@ -37,16 +45,17 @@ const MainNavForXsToSmDevice = ({ site }) => {
     return (
       <div>
         <List>
-          {navTargets.map((navTarget, index) => (
+          {navTargets.map(navTarget => (
             <Link underline="none" href={navTarget.href}>
               <ListItem
                 button
                 key={navTarget.name}
-                className={mainNavStyles.drawerItem}
               >
-                <Typography color="textPrimary">
-                  <ListItemText primary={navTarget.name} />
-                </Typography>
+                <DrawerItem>
+                  <Typography color="textPrimary">
+                    <ListItemText primary={navTarget.name} />
+                  </Typography>
+                </DrawerItem>
               </ListItem>
             </Link>
           ))}
@@ -97,7 +106,7 @@ const MainNavForMdToXlDevice = ({ site }) => {
       <Grid item md={2} />
       {navTargets.map(navTarget => {
         return (
-          <Grid item md={1} className={mainNavStyles.navItem}>
+          <Grid item md={1} style={{ textAlign: "center" }}>
             <Link underline="none" href={navTarget.href}>
               <Typography color="textPrimary" variant="h6">
                 {navTarget.name}
