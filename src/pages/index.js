@@ -64,7 +64,7 @@ const SocialMediaIconsGrid = ({ linkedinUrl, instagramUrl, githubUrl }) => {
   );
 };
 
-const App = ({ data }) => {
+const App = ({ data, location }) => {
   const avatarFluid = data?.avatar?.childImageSharp?.fluid;
   const {
     instagram,
@@ -72,7 +72,7 @@ const App = ({ data }) => {
     github,
   } = data?.site?.siteMetadata?.author?.social;
   return (
-    <AppLayout>
+    <AppLayout location={location}>
       <IndexPageContainer>
         <Grid container alignItems="center" justify="center">
           <Grid item xs={12} md={4}>
