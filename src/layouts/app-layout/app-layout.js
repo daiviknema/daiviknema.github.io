@@ -1,6 +1,6 @@
 import React from "react";
-import MainNav from "../components/main-nav/main-nav";
-import MainFooter from "../components/main-footer/main-footer";
+import MainNav from "../../components/main-nav/main-nav";
+import MainFooter from "../../components/main-footer/main-footer";
 import styled from "styled-components";
 
 const AppContainer = styled.div`
