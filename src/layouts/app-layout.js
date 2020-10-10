@@ -10,10 +10,10 @@ const AppContainer = styled.div`
   margin-top: 1rem;
 `;
 
-const AppLayout = ({ children }) => {
+const AppLayout = ({ location, children }) => {
   return (
     <AppContainer>
-      <MainNav />
+      <MainNav location={location} />
       {children}
       <MainFooter />
     </AppContainer>

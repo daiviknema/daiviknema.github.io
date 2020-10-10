@@ -3,11 +3,11 @@ import SEO from "../components/seo";
 import AppLayout from "../layouts/app-layout";
 import UnderConstruction from "../components/under-construction/under-construction";
 
-const AboutPage = () => {
+const AboutPage = ({ location }) => {
   return (
-    <AppLayout>
+    <AppLayout location={location}>
       {/* TODO: Fill out description and meta */}
-      <SEO title="About" description="" meta={{}} />
+      <SEO title="About" description="" meta={[]} />
       <UnderConstruction />
     </AppLayout>
   );
