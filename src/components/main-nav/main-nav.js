@@ -3,7 +3,6 @@ import { graphql, useStaticQuery } from "gatsby";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "gatsby-theme-material-ui";
-import mainNavStyles from "./main-nav.module.css";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Drawer from "@material-ui/core/Drawer";
@@ -12,41 +11,81 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
+import styled from "styled-components";
 
 const navTargets = [
   {
     name: "About",
-    href: "/about",
+    href: "/about/",
   },
   {
     name: "Blog",
-    href: "/blog",
+    href: "/blog/",
   },
   {
     name: "Projects",
-    href: "/projects",
+    href: "/projects/",
   },
 ];
 
-const MainNavForXsToSmDevice = ({ site }) => {
+const DrawerItem = styled.div`
+  min-width: 17rem;
+
+  @media screen and (min-width: 600px) {
+    min-width: 20rem;
+  }
+`;
+
+const NavMenuItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ::after {
+    content: "";
+    height: 2px;
+    width: ${props => (props.isActive ? "90%" : "0%")};
+    background: ${props => props.underlineColor};
+    -o-transition: 0.2s;
+    -ms-transition: 0.2s;
+    -moz-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+  }
+
+  :hover::after {
+    display: block;
+    width: 90%;
+  }
+`;
+
+const MainNavForXsToSmDevice = ({ site, location }) => {
   const [state, setState] = React.useState({
     showDrawer: false,
   });
+
+  const theme = useTheme();
 
   const drawerItems = () => {
     return (
       <div>
         <List>
-          {navTargets.map((navTarget, index) => (
+          {navTargets.map(navTarget => (
             <Link underline="none" href={navTarget.href}>
               <ListItem
                 button
                 key={navTarget.name}
-                className={mainNavStyles.drawerItem}
+                style={
+                  navTarget.href === location?.pathname
+                    ? { background: theme.palette.primary.main }
+                    : {}
+                }
               >
-                <Typography color="textPrimary">
-                  <ListItemText primary={navTarget.name} />
-                </Typography>
+                <DrawerItem>
+                  <Typography color="textPrimary">
+                    <ListItemText primary={navTarget.name} />
+                  </Typography>
+                </DrawerItem>
               </ListItem>
             </Link>
           ))}
@@ -84,7 +123,9 @@ const MainNavForXsToSmDevice = ({ site }) => {
   );
 };
 
-const MainNavForMdToXlDevice = ({ site }) => {
+const MainNavForMdToXlDevice = ({ site, location }) => {
+  const theme = useTheme();
+  console.log(location);
   return (
     <Grid container alignItems="baseline">
       <Grid item md={6}>
@@ -97,12 +138,22 @@ const MainNavForMdToXlDevice = ({ site }) => {
       <Grid item md={2} />
       {navTargets.map(navTarget => {
         return (
-          <Grid item md={1} className={mainNavStyles.navItem}>
-            <Link underline="none" href={navTarget.href}>
-              <Typography color="textPrimary" variant="h6">
-                {navTarget.name}
-              </Typography>
-            </Link>
+          <Grid
+            item
+            md={1}
+            key={navTarget.href}
+            style={{ textAlign: "center" }}
+          >
+            <NavMenuItem
+              isActive={navTarget.href === location?.pathname}
+              underlineColor={theme.palette.text.primary}
+            >
+              <Link underline="none" href={navTarget.href}>
+                <Typography color="textPrimary" variant="h6">
+                  {navTarget.name}
+                </Typography>
+              </Link>
+            </NavMenuItem>
           </Grid>
         );
       })}
@@ -111,7 +162,7 @@ const MainNavForMdToXlDevice = ({ site }) => {
   );
 };
 
-const MainNav = () => {
+const MainNav = ({ location }) => {
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -126,9 +177,9 @@ const MainNav = () => {
     theme.breakpoints.between("xs", "sm")
   );
   if (deviceBetweenXsAndSm) {
-    return <MainNavForXsToSmDevice site={site} />;
+    return <MainNavForXsToSmDevice site={site} location={location} />;
   }
-  return <MainNavForMdToXlDevice site={site} />;
+  return <MainNavForMdToXlDevice site={site} location={location} />;
 };
 
 export default MainNav;

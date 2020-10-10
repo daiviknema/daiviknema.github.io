@@ -7,22 +7,23 @@ module.exports = {
       social: {
         instagram: {
           profileUrl: `https://www.instagram.com/code.or.die/`,
-          username: `@code.or.die`
+          username: `@code.or.die`,
         },
         linkedin: {
           profileUrl: `https://in.linkedin.com/public-profile/in/daivik-nema-3bb44114a`,
-          username: `Daivik Nema`
+          username: `Daivik Nema`,
         },
         github: {
           profileUrl: `https://github.com/daiviknema`,
-          username: `daiviknema`
-        }
+          username: `daiviknema`,
+        },
       },
     },
     description: ``,
     siteUrl: `https://daiviknema.github.io/`,
   },
   plugins: [
+    `gatsby-plugin-styled-components`,
     {
       // Source plugin to bring in markdown files from the filesystem
       // Generates allFile and file nodes
@@ -103,8 +104,8 @@ module.exports = {
               },
               {
                 family: `Oswald`,
-                variants: [`300`, `400`, `500`]
-              }
+                variants: [`300`, `400`, `500`],
+              },
             ],
           },
         },

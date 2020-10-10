@@ -19,13 +19,13 @@ import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import styles from "./styles/about.module.css";
 
-const AboutPage = () => {
+const AboutPage = ({ location }) => {
   const theme = useTheme();
   const isXsToSmScreen = useMediaQuery(theme.breakpoints.between("xs", "sm"));
   return (
-    <AppLayout>
+    <AppLayout location={location}>
       {/* TODO: Fill out description and meta */}
-      <SEO title="About" description="" meta={{}} />
+      <SEO title="About" description="" meta={[]} />
       <Grid container>
         <Grid item xs={1} md={3}>
           <Timeline className={styles.timeline}>

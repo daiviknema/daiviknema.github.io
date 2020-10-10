@@ -2,9 +2,9 @@ import React from "react";
 import AppLayout from "../layouts/app-layout/app-layout";
 import UnderConstruction from "../components/under-construction/under-construction";
 
-const BlogIndex = () => {
+const BlogIndex = ({ location }) => {
   return (
-    <AppLayout>
+    <AppLayout location={location}>
       <UnderConstruction />
     </AppLayout>
   );
