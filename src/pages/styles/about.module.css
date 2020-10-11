@@ -1,9 +1,0 @@
-.timeline {
-  padding-left: 0px;
-  padding-right: 0px;
-  position: sticky;
-  top: 0px;
-}
-.timelineItem::before {
-  padding: 0px;
-}

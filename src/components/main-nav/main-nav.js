@@ -16,15 +16,15 @@ import styled from "styled-components";
 const navTargets = [
   {
     name: "About",
-    href: "/about/",
+    href: "/about",
   },
   {
     name: "Blog",
-    href: "/blog/",
+    href: "/blog",
   },
   {
     name: "Projects",
-    href: "/projects/",
+    href: "/projects",
   },
 ];
 
@@ -76,7 +76,7 @@ const MainNavForXsToSmDevice = ({ site, location }) => {
                 button
                 key={navTarget.name}
                 style={
-                  navTarget.href === location?.pathname
+                  location?.pathname?.includes(navTarget.href)
                     ? { background: theme.palette.primary.main }
                     : {}
                 }
@@ -145,7 +145,7 @@ const MainNavForMdToXlDevice = ({ site, location }) => {
             style={{ textAlign: "center" }}
           >
             <NavMenuItem
-              isActive={navTarget.href === location?.pathname}
+              isActive={location?.pathname?.includes(navTarget.href)}
               underlineColor={theme.palette.text.primary}
             >
               <Link underline="none" href={navTarget.href}>
