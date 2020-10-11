@@ -42,7 +42,7 @@ let theme = createMuiTheme({
     },
     body2: {
       fontFamily: "Raleway",
-      fontWeight: 200,
+      fontWeight: 300,
       letterSpacing: "-0.01em",
     },
     caption: {

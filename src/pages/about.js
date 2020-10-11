@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import SEO from "../components/seo";
 import Bio from "../components/bio/bio";
 import AppLayout from "../layouts/app-layout/app-layout";
@@ -12,7 +12,7 @@ import {
   TimelineConnector,
 } from "@material-ui/lab";
 import Typography from "@material-ui/core/Typography";
-import { EmojiEvents, School, Star, Work } from "@material-ui/icons";
+import { EmojiEvents, School, Star, Work, Code } from "@material-ui/icons";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
 import useTheme from "@material-ui/styles/useTheme";
 import Grid from "@material-ui/core/Grid";
@@ -36,22 +36,106 @@ const SKILLS = "Skills";
 const PERSONAL = "Personal";
 
 const WorkExperience = () => {
+  const [state, setState] = useState({
+    deshaw: { collapsed: true },
+    oyo: { collapsed: true },
+  });
+
+  const toggleDeshawCollapsed = () => {
+    const collapseStatus = state?.deshaw?.collapsed;
+    setState({ deshaw: { collapsed: !collapseStatus } });
+  };
   return (
-    <Typography variant="body2">
-      Irure velit minim est tempor aliquip ullamco. Tempor nisi qui duis nulla
-      amet nostrud ea. Deserunt tempor nostrud commodo incididunt amet anim
-      consequat. Commodo magna Lorem cupidatat sunt laborum. Amet cupidatat
-      nulla esse ut amet mollit ea et ullamco consectetur velit reprehenderit
-      consectetur. Qui in culpa culpa officia adipisicing. Pariatur pariatur
-      fugiat tempor sint pariatur sunt occaecat enim. Eu mollit dolor in sint et
-      nostrud sunt commodo Lorem eiusmod. Enim ea aute incididunt nostrud
-      deserunt ea esse amet laborum laborum ullamco do tempor. Consequat dolor
-      do minim ad duis magna eu mollit ex. Dolore enim deserunt elit aliquip
-      officia officia cillum est sit proident non deserunt nostrud elit. In sit
-      eu Lorem incididunt ut pariatur quis in nostrud irure mollit veniam enim
-      sint. Aute ad id nulla deserunt velit Lorem cillum proident adipisicing
-      adipisicing nisi do.
-    </Typography>
+    <Grid container alignItems="baseline" style={{ paddingTop: "5px" }}>
+      <Grid item xs={8}>
+        <Typography variant="body1">D.E. Shaw & Co.</Typography>
+      </Grid>
+      <Grid item xs={4} style={{ textAlign: "right" }}>
+        <Typography variant="body2">
+          <i>Present</i>
+        </Typography>
+      </Grid>
+      <Grid item xs={12} style={{ padding: "5px 0px" }}>
+        <Typography variant="body2" paragraph>
+          Currently I'm working at DE Shaw India as a Senior Member Technical in
+          the Payroll Dev team. My responsibilities mainly include developing
+          and maintaining the complete stack of various internal payroll
+          applications at DE Shaw.{" "}
+          {state.deshaw.collapsed && (
+            <a onClick={toggleDeshawCollapsed}>(more...)</a>
+          )}
+        </Typography>
+        {!state?.deshaw?.collapsed && (
+          <Typography variant="body2" paragraph>
+            My day-to-day activities include:
+            <ul style={{ marginTop: "0px" }}>
+              <li>
+                <Typography variant="body2">
+                  Actively participating in all stages of the SDLC; right from
+                  requirement gathering and planning through to the actual
+                  development, testing and release of new features.
+                </Typography>
+              </li>
+              <li>
+                <Typography variant="body2">
+                  Interacting with various stakeholders such as UX designers,
+                  testers, external team POCs and system administrators to
+                  ensure that:
+                </Typography>
+                <ul>
+                  <li>
+                    <Typography variant="body2">
+                      The projects that are under active development are
+                      on-track for completion as per the decided timelines
+                    </Typography>
+                  </li>
+                  <li>
+                    <Typography variant="body2">
+                      All payroll applications have high availability and any
+                      infra upgrades or issues do not affect business activities
+                    </Typography>
+                  </li>
+                  <li>
+                    <Typography variant="body2">
+                      The turnaround time for ops issues on existing features is
+                      minimal.
+                    </Typography>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <Typography variant="body2">
+                  Mentoring junior devs on features that they are building.
+                  Coordinating them keeping in mind the final deliverable and
+                  performing code reviews
+                </Typography>
+              </li>
+              <li>
+                <Typography variant="body2">
+                  Interviewing potential MT and SMT hires for DE Shaw
+                </Typography>
+              </li>
+            </ul>
+            <a onClick={toggleDeshawCollapsed}>(less)</a>
+          </Typography>
+        )}
+        {/* <Typography variant="body2" paragraph>
+          I am an active participant in all stages of the SDLC; right from
+          requirement gathering and planning through to the actual development,
+          testing and release of new features. My day-to-day activities include
+          a high degree of interaction with various stakeholders such as UX
+          designers, testers, external team POCs and system administrators to
+          ensure that: a. the projects that are under active development are
+          on-track for completion as per the decided timelines; b. all payroll
+          applications have high availability and any infra upgrades or issues
+          do not affect business activities; and c. the turnaround time for ops
+          issues on existing features is minimal. I also work closely with two
+          junior devs - mentoring them on the features that they are building
+          and reviewing their code. From time to time, I also interview
+          potential hires on behalf of the firm
+        </Typography> */}
+      </Grid>
+    </Grid>
   );
 };
 
@@ -122,44 +206,67 @@ const Personal = () => {
   );
 };
 
-const aboutPageSections = [
-  {
-    sectionTitle: WORK_EXPERIENCE,
-    sectionHref: "/about#professional-experience",
-    sectionAnchor: "professional-experience",
-    sectionContent: <WorkExperience />,
-  },
-  {
-    sectionTitle: EDUCATION,
-    sectionHref: "/about#education",
-    sectionAnchor: "education",
-    sectionContent: <Education />,
-  },
-  {
-    sectionTitle: ACHIEVEMENTS,
-    sectionHref: "/about#achievements",
-    sectionAnchor: "achievements",
-    sectionContent: <Achievements />,
-  },
-  {
-    sectionTitle: SKILLS,
-    sectionHref: "/about#skills",
-    sectionAnchor: "skills",
-    sectionContent: <Skills />,
-  },
-  {
-    sectionTitle: PERSONAL,
-    sectionHref: "/about#personal",
-    sectionAnchor: "personal",
-    sectionContent: <Personal />,
-  },
-];
-
 const AboutPage = ({ data, location }) => {
   const theme = useTheme();
   const isXsToSmScreen = useMediaQuery(theme.breakpoints.between("xs", "sm"));
 
-  const TimelineSegment = ({ caption, href, isTerminalSegment, children }) => {
+  const aboutPageSections = [
+    {
+      sectionTitle: WORK_EXPERIENCE,
+      sectionHref: "/about#professional-experience",
+      sectionAnchor: "professional-experience",
+      sectionContent: <WorkExperience />,
+      sectionIcon: (
+        <Work fontSize="small" style={{ fill: theme.palette.text.primary }} />
+      ),
+    },
+    {
+      sectionTitle: EDUCATION,
+      sectionHref: "/about#education",
+      sectionAnchor: "education",
+      sectionContent: <Education />,
+      sectionIcon: (
+        <School fontSize="small" style={{ fill: theme.palette.text.primary }} />
+      ),
+    },
+    {
+      sectionTitle: ACHIEVEMENTS,
+      sectionHref: "/about#achievements",
+      sectionAnchor: "achievements",
+      sectionContent: <Achievements />,
+      sectionIcon: (
+        <EmojiEvents
+          fontSize="small"
+          style={{ fill: theme.palette.text.primary }}
+        />
+      ),
+    },
+    {
+      sectionTitle: SKILLS,
+      sectionHref: "/about#skills",
+      sectionAnchor: "skills",
+      sectionContent: <Skills />,
+      sectionIcon: (
+        <Code fontSize="small" style={{ fill: theme.palette.text.primary }} />
+      ),
+    },
+    {
+      sectionTitle: PERSONAL,
+      sectionHref: "/about#personal",
+      sectionAnchor: "personal",
+      sectionContent: <Personal />,
+      sectionIcon: (
+        <Star fontSize="small" style={{ fill: theme.palette.text.primary }} />
+      ),
+    },
+  ];
+
+  const TimelineSegment = ({
+    caption,
+    href,
+    sectionIcon,
+    isTerminalSegment,
+  }) => {
     return (
       <AboutPageTimelineItem>
         <TimelineItem>
@@ -169,13 +276,11 @@ const AboutPage = ({ data, location }) => {
             </TimelineOppositeContent>
           )}
           <TimelineSeparator>
-            <TimelineDot>
+            <TimelineDot style={{ marginTop: "2px", marginBottom: "2px" }}>
               <AnchorLink to={href} underline="none">
-                {/* <Work
-                  fontSize={"small"}
-                  style={{ fill: theme.palette.text.primary }}
-                /> */}
-                {children}
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  {sectionIcon}
+                </div>
               </AnchorLink>
             </TimelineDot>
             {isTerminalSegment && <TimelineConnector />}
@@ -222,39 +327,9 @@ const AboutPage = ({ data, location }) => {
                 <TimelineSegment
                   caption={aboutPageSection.sectionTitle}
                   href={aboutPageSection.sectionHref}
+                  sectionIcon={aboutPageSection.sectionIcon}
                   isTerminalSegment={index !== aboutPageSections.length - 1}
-                >
-                  {aboutPageSection?.sectionTitle === WORK_EXPERIENCE && (
-                    <Work
-                      fontSize="small"
-                      style={{ fill: theme.palette.text.primary }}
-                    />
-                  )}
-                  {aboutPageSection?.sectionTitle === EDUCATION && (
-                    <School
-                      fontSize="small"
-                      style={{ fill: theme.palette.text.primary }}
-                    />
-                  )}
-                  {aboutPageSection?.sectionTitle === ACHIEVEMENTS && (
-                    <EmojiEvents
-                      fontSize="small"
-                      style={{ fill: theme.palette.text.primary }}
-                    />
-                  )}
-                  {aboutPageSection?.sectionTitle === SKILLS && (
-                    <Star
-                      fontSize="small"
-                      style={{ fill: theme.palette.text.primary }}
-                    />
-                  )}
-                  {aboutPageSection?.sectionTitle === PERSONAL && (
-                    <Work
-                      fontSize="small"
-                      style={{ fill: theme.palette.text.primary }}
-                    />
-                  )}
-                </TimelineSegment>
+                />
               );
             })}
           </Timeline>

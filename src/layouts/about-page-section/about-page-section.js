@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 
 const AboutSectionInternal = styled.div`
   padding: 10px 20px;
@@ -15,6 +16,7 @@ const AboutPageSection = ({ sectionTitle, sectionAnchor, children }) => {
       <Paper elevation={6}>
         <AboutSectionInternal>
           <Typography variant="h5">{sectionTitle}</Typography>
+          <Divider />
           {children}
         </AboutSectionInternal>
       </Paper>
