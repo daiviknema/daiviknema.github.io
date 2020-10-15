@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import SEO from "../components/seo";
 import Bio from "../components/bio/bio";
 import AppLayout from "../layouts/app-layout/app-layout";
@@ -18,6 +18,11 @@ import useTheme from "@material-ui/styles/useTheme";
 import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import styled from "styled-components";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import Divider from "@material-ui/core/Divider";
+import { withStyles } from "@material-ui/core";
 
 const TextContainer = styled.div`
   text-align: left;
@@ -36,104 +41,191 @@ const SKILLS = "Skills";
 const PERSONAL = "Personal";
 
 const WorkExperience = () => {
-  const [state, setState] = useState({
-    deshaw: { collapsed: true },
-    oyo: { collapsed: true },
-  });
+  const StyledAccordionSummary = withStyles({
+    root: {
+      margin: "0px 0px",
+    },
+    content: {
+      margin: "5px 0px !important",
+    },
+  })(AccordionSummary);
 
-  const toggleDeshawCollapsed = () => {
-    const collapseStatus = state?.deshaw?.collapsed;
-    setState({ deshaw: { collapsed: !collapseStatus } });
-  };
+  const StyledDivider = withStyles({
+    root: { marginTop: "3px", marginBottom: "3px" },
+  })(Divider);
+
   return (
-    <Grid container alignItems="baseline" style={{ paddingTop: "5px" }}>
-      <Grid item xs={8}>
-        <Typography variant="body1">D.E. Shaw & Co.</Typography>
-      </Grid>
-      <Grid item xs={4} style={{ textAlign: "right" }}>
-        <Typography variant="body2">
-          <i>Present</i>
-        </Typography>
+    <Grid container>
+      <Grid item xs={12} style={{ padding: "5px 0px" }}>
+        <Accordion elevation={6}>
+          <StyledAccordionSummary
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Grid container alignItems="baseline" style={{ paddingTop: "5px" }}>
+              <Grid item xs={8}>
+                <Typography variant="body1">D.E. Shaw & Co.</Typography>
+              </Grid>
+              <Grid item xs={4} style={{ textAlign: "right" }}>
+                <Typography variant="body2">
+                  <i>Present</i>
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <StyledDivider />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2" paragraph>
+                  I'm currently working at D.E. Shaw India as a Senior Member
+                  Technical in the Payroll Dev team. My primary responsibilities
+                  include developing and maintaining the complete stack of
+                  various payroll processing applications internal to D.E. Shaw.
+                </Typography>
+              </Grid>
+            </Grid>
+          </StyledAccordionSummary>
+          <AccordionDetails>
+            <Typography variant="body2" paragraph>
+              My day-to-day activities include:
+              <ul style={{ marginTop: "0px" }}>
+                <li>
+                  <Typography variant="body2">
+                    Actively participating in all stages of the SDLC; right from
+                    requirement gathering and planning through to the actual
+                    development, testing, release and maintenance of new
+                    features.
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="body2">
+                    Interacting with various stakeholders such as UX designers,
+                    testers, external team POCs and system administrators to
+                    ensure that:
+                  </Typography>
+                  <ul>
+                    <li>
+                      <Typography variant="body2">
+                        The projects that are under active development are
+                        on-track for completion as per the decided timelines
+                      </Typography>
+                    </li>
+                    <li>
+                      <Typography variant="body2">
+                        All payroll applications have high availability and any
+                        infra upgrades or issues are not affecting business
+                        activities
+                      </Typography>
+                    </li>
+                    <li>
+                      <Typography variant="body2">
+                        The turnaround time for operational issues on existing
+                        features is minimal.
+                      </Typography>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <Typography variant="body2">
+                    Mentoring junior devs on features that they are building.
+                    Coordinating them keeping in mind the final deliverable and
+                    performing code reviews
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="body2">
+                    Interviewing potential MT and SMT hires for DE Shaw
+                  </Typography>
+                </li>
+              </ul>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
       </Grid>
       <Grid item xs={12} style={{ padding: "5px 0px" }}>
-        <Typography variant="body2" paragraph>
-          Currently I'm working at DE Shaw India as a Senior Member Technical in
-          the Payroll Dev team. My responsibilities mainly include developing
-          and maintaining the complete stack of various internal payroll
-          applications at DE Shaw.{" "}
-          {state.deshaw.collapsed && (
-            <a onClick={toggleDeshawCollapsed}>(more...)</a>
-          )}
-        </Typography>
-        {!state?.deshaw?.collapsed && (
-          <Typography variant="body2" paragraph>
-            My day-to-day activities include:
-            <ul style={{ marginTop: "0px" }}>
-              <li>
+        <Accordion elevation={6}>
+          <StyledAccordionSummary
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Grid container alignItems="baseline" style={{ paddingTop: "5px" }}>
+              <Grid item xs={8}>
+                <Typography variant="body1">OYO Rooms</Typography>
+              </Grid>
+              <Grid item xs={4} style={{ textAlign: "right" }}>
                 <Typography variant="body2">
-                  Actively participating in all stages of the SDLC; right from
-                  requirement gathering and planning through to the actual
-                  development, testing and release of new features.
+                  <i>Jun '19</i>
                 </Typography>
-              </li>
-              <li>
-                <Typography variant="body2">
-                  Interacting with various stakeholders such as UX designers,
-                  testers, external team POCs and system administrators to
-                  ensure that:
+              </Grid>
+              <Grid item xs={12}>
+                <StyledDivider />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2" paragraph>
+                  OYO Rooms is one of the fastest growing tech startups in
+                  India. As a part of the Finance Tech team; I worked on
+                  building new features and implementing business logic changes
+                  in the automated reconciliation of ”Smart”-tier OYO partner
+                  hotels.
                 </Typography>
-                <ul>
-                  <li>
-                    <Typography variant="body2">
-                      The projects that are under active development are
-                      on-track for completion as per the decided timelines
-                    </Typography>
-                  </li>
-                  <li>
-                    <Typography variant="body2">
-                      All payroll applications have high availability and any
-                      infra upgrades or issues do not affect business activities
-                    </Typography>
-                  </li>
-                  <li>
-                    <Typography variant="body2">
-                      The turnaround time for ops issues on existing features is
-                      minimal.
-                    </Typography>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <Typography variant="body2">
-                  Mentoring junior devs on features that they are building.
-                  Coordinating them keeping in mind the final deliverable and
-                  performing code reviews
-                </Typography>
-              </li>
-              <li>
-                <Typography variant="body2">
-                  Interviewing potential MT and SMT hires for DE Shaw
-                </Typography>
-              </li>
-            </ul>
-            <a onClick={toggleDeshawCollapsed}>(less)</a>
-          </Typography>
-        )}
-        {/* <Typography variant="body2" paragraph>
-          I am an active participant in all stages of the SDLC; right from
-          requirement gathering and planning through to the actual development,
-          testing and release of new features. My day-to-day activities include
-          a high degree of interaction with various stakeholders such as UX
-          designers, testers, external team POCs and system administrators to
-          ensure that: a. the projects that are under active development are
-          on-track for completion as per the decided timelines; b. all payroll
-          applications have high availability and any infra upgrades or issues
-          do not affect business activities; and c. the turnaround time for ops
-          issues on existing features is minimal. I also work closely with two
-          junior devs - mentoring them on the features that they are building
-          and reviewing their code. From time to time, I also interview
-          potential hires on behalf of the firm
-        </Typography> */}
+              </Grid>
+            </Grid>
+          </StyledAccordionSummary>
+          <AccordionDetails>
+            <Typography variant="body2" paragraph>
+              My day-to-day activities include:
+              <ul style={{ marginTop: "0px" }}>
+                <li>
+                  <Typography variant="body2">
+                    Actively participating in all stages of the SDLC; right from
+                    requirement gathering and planning through to the actual
+                    development, testing, release and maintenance of new
+                    features.
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="body2">
+                    Interacting with various stakeholders such as UX designers,
+                    testers, external team POCs and system administrators to
+                    ensure that:
+                  </Typography>
+                  <ul>
+                    <li>
+                      <Typography variant="body2">
+                        The projects that are under active development are
+                        on-track for completion as per the decided timelines
+                      </Typography>
+                    </li>
+                    <li>
+                      <Typography variant="body2">
+                        All payroll applications have high availability and any
+                        infra upgrades or issues are not affecting business
+                        activities
+                      </Typography>
+                    </li>
+                    <li>
+                      <Typography variant="body2">
+                        The turnaround time for operational issues on existing
+                        features is minimal.
+                      </Typography>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <Typography variant="body2">
+                    Mentoring junior devs on features that they are building.
+                    Coordinating them keeping in mind the final deliverable and
+                    performing code reviews
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="body2">
+                    Interviewing potential MT and SMT hires for DE Shaw
+                  </Typography>
+                </li>
+              </ul>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
       </Grid>
     </Grid>
   );
@@ -318,8 +410,9 @@ const AboutPage = ({ data, location }) => {
             style={{
               paddingLeft: "0px",
               paddingRight: "0px",
+              paddingTop: "20px",
               position: "sticky",
-              top: "0px",
+              top: "10px",
             }}
           >
             {aboutPageSections.map((aboutPageSection, index) => {
