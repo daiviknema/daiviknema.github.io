@@ -12,17 +12,22 @@ import {
   TimelineConnector,
 } from "@material-ui/lab";
 import Typography from "@material-ui/core/Typography";
-import { EmojiEvents, School, Star, Work, Code } from "@material-ui/icons";
+import {
+  EmojiEvents,
+  School,
+  Star,
+  Work,
+  Code,
+  Toys,
+} from "@material-ui/icons";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
 import useTheme from "@material-ui/styles/useTheme";
 import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import styled from "styled-components";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import Divider from "@material-ui/core/Divider";
-import { withStyles } from "@material-ui/core";
+import WorkExperience from "../components/about/WorkExperience";
+import Education from "../components/about/Education";
+import Link from "@material-ui/core/Link";
 
 const TextContainer = styled.div`
   text-align: left;
@@ -36,229 +41,16 @@ const AboutPageTimelineItem = styled.div`
 
 const WORK_EXPERIENCE = "Work Experience";
 const EDUCATION = "Education";
+const PROJECTS = "Projects";
 const ACHIEVEMENTS = "Achievements";
 const SKILLS = "Skills";
 const PERSONAL = "Personal";
 
-const WorkExperience = () => {
-  const StyledAccordionSummary = withStyles({
-    root: {
-      margin: "0px 0px",
-    },
-    content: {
-      margin: "5px 0px !important",
-    },
-  })(AccordionSummary);
-
-  const StyledDivider = withStyles({
-    root: { marginTop: "3px", marginBottom: "3px" },
-  })(Divider);
-
-  return (
-    <Grid container>
-      <Grid item xs={12} style={{ padding: "5px 0px" }}>
-        <Accordion elevation={6}>
-          <StyledAccordionSummary
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Grid container alignItems="baseline" style={{ paddingTop: "5px" }}>
-              <Grid item xs={8}>
-                <Typography variant="body1">D.E. Shaw & Co.</Typography>
-              </Grid>
-              <Grid item xs={4} style={{ textAlign: "right" }}>
-                <Typography variant="body2">
-                  <i>Present</i>
-                </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <StyledDivider />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant="body2" paragraph>
-                  I'm currently working at D.E. Shaw India as a Senior Member
-                  Technical in the Payroll Dev team. My primary responsibilities
-                  include developing and maintaining the complete stack of
-                  various payroll processing applications internal to D.E. Shaw.
-                </Typography>
-              </Grid>
-            </Grid>
-          </StyledAccordionSummary>
-          <AccordionDetails>
-            <Typography variant="body2" paragraph>
-              My day-to-day activities include:
-              <ul style={{ marginTop: "0px" }}>
-                <li>
-                  <Typography variant="body2">
-                    Actively participating in all stages of the SDLC; right from
-                    requirement gathering and planning through to the actual
-                    development, testing, release and maintenance of new
-                    features.
-                  </Typography>
-                </li>
-                <li>
-                  <Typography variant="body2">
-                    Interacting with various stakeholders such as UX designers,
-                    testers, external team POCs and system administrators to
-                    ensure that:
-                  </Typography>
-                  <ul>
-                    <li>
-                      <Typography variant="body2">
-                        The projects that are under active development are
-                        on-track for completion as per the decided timelines
-                      </Typography>
-                    </li>
-                    <li>
-                      <Typography variant="body2">
-                        All payroll applications have high availability and any
-                        infra upgrades or issues are not affecting business
-                        activities
-                      </Typography>
-                    </li>
-                    <li>
-                      <Typography variant="body2">
-                        The turnaround time for operational issues on existing
-                        features is minimal.
-                      </Typography>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <Typography variant="body2">
-                    Mentoring junior devs on features that they are building.
-                    Coordinating them keeping in mind the final deliverable and
-                    performing code reviews
-                  </Typography>
-                </li>
-                <li>
-                  <Typography variant="body2">
-                    Interviewing potential MT and SMT hires for DE Shaw
-                  </Typography>
-                </li>
-              </ul>
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      </Grid>
-      <Grid item xs={12} style={{ padding: "5px 0px" }}>
-        <Accordion elevation={6}>
-          <StyledAccordionSummary
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Grid container alignItems="baseline" style={{ paddingTop: "5px" }}>
-              <Grid item xs={8}>
-                <Typography variant="body1">OYO Rooms</Typography>
-              </Grid>
-              <Grid item xs={4} style={{ textAlign: "right" }}>
-                <Typography variant="body2">
-                  <i>Jun '19</i>
-                </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <StyledDivider />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant="body2" paragraph>
-                  OYO Rooms is one of the fastest growing tech startups in
-                  India. As a part of the Finance Tech team; I worked on
-                  building new features and implementing business logic changes
-                  in the automated reconciliation of ”Smart”-tier OYO partner
-                  hotels.
-                </Typography>
-              </Grid>
-            </Grid>
-          </StyledAccordionSummary>
-          <AccordionDetails>
-            <Typography variant="body2" paragraph>
-              My day-to-day activities include:
-              <ul style={{ marginTop: "0px" }}>
-                <li>
-                  <Typography variant="body2">
-                    Actively participating in all stages of the SDLC; right from
-                    requirement gathering and planning through to the actual
-                    development, testing, release and maintenance of new
-                    features.
-                  </Typography>
-                </li>
-                <li>
-                  <Typography variant="body2">
-                    Interacting with various stakeholders such as UX designers,
-                    testers, external team POCs and system administrators to
-                    ensure that:
-                  </Typography>
-                  <ul>
-                    <li>
-                      <Typography variant="body2">
-                        The projects that are under active development are
-                        on-track for completion as per the decided timelines
-                      </Typography>
-                    </li>
-                    <li>
-                      <Typography variant="body2">
-                        All payroll applications have high availability and any
-                        infra upgrades or issues are not affecting business
-                        activities
-                      </Typography>
-                    </li>
-                    <li>
-                      <Typography variant="body2">
-                        The turnaround time for operational issues on existing
-                        features is minimal.
-                      </Typography>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <Typography variant="body2">
-                    Mentoring junior devs on features that they are building.
-                    Coordinating them keeping in mind the final deliverable and
-                    performing code reviews
-                  </Typography>
-                </li>
-                <li>
-                  <Typography variant="body2">
-                    Interviewing potential MT and SMT hires for DE Shaw
-                  </Typography>
-                </li>
-              </ul>
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      </Grid>
-    </Grid>
-  );
-};
-
-const Education = () => {
+const Projects = () => {
   return (
     <Typography variant="body2">
-      Lorem irure pariatur est proident cillum est id. Cillum sit anim elit
-      consectetur. Quis quis dolore aute aliquip culpa non reprehenderit minim
-      adipisicing elit aliquip nisi amet. Ex eiusmod officia in ex minim non
-      aliquip ad veniam non. Officia quis consectetur enim ullamco nisi eu in
-      proident ut. Non officia deserunt mollit aute enim. Esse eiusmod irure
-      laboris consequat et consequat. Aliquip ad adipisicing eiusmod aliqua
-      aliquip ex velit sit incididunt ut. Proident nostrud adipisicing dolor in
-      est mollit ipsum. Reprehenderit fugiat magna aliquip ea sunt sint veniam.
-      Proident qui fugiat est laboris nostrud consequat ex duis quis id culpa
-      sint voluptate fugiat. Nostrud velit sit aute nisi cillum anim velit
-      exercitation sit magna incididunt officia. Occaecat aliquip nostrud
-      voluptate mollit culpa eiusmod culpa occaecat dolore velit pariatur velit
-      amet magna. Dolore proident aliquip sint mollit culpa adipisicing fugiat
-      aliqua irure enim quis nisi nulla tempor. Consectetur fugiat nisi et enim
-      ullamco ut eu ullamco aute duis reprehenderit. Incididunt ut ea dolore ex
-      occaecat commodo irure velit veniam laborum. Elit officia enim non quis
-      sint nostrud exercitation ullamco eiusmod. Proident laboris incididunt
-      magna quis quis est laboris minim eu amet voluptate ea anim exercitation.
-      Non ipsum dolore occaecat ad minim Lorem deserunt nulla culpa et nostrud
-      non quis labore. Adipisicing eu Lorem culpa velit ex et magna ad voluptate
-      nulla veniam ut aliqua consectetur. Minim anim culpa mollit occaecat
-      pariatur esse elit exercitation consequat adipisicing dolor elit
-      consectetur cillum. Velit cupidatat aute duis duis. Veniam veniam sint non
-      magna est proident consequat voluptate dolor tempor. Ea proident eu ut
-      labore esse ullamco qui veniam ullamco aute.
+      Please check out my <Link href="/projects">projects page</Link> for a
+      complete list.
     </Typography>
   );
 };
@@ -319,6 +111,15 @@ const AboutPage = ({ data, location }) => {
       sectionContent: <Education />,
       sectionIcon: (
         <School fontSize="small" style={{ fill: theme.palette.text.primary }} />
+      ),
+    },
+    {
+      sectionTitle: PROJECTS,
+      sectionHref: "/about#projects",
+      sectionAnchor: "projects",
+      sectionContent: <Projects />,
+      sectionIcon: (
+        <Toys fontSize="small" style={{ fill: theme.palette.text.primary }} />
       ),
     },
     {
