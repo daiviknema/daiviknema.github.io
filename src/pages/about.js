@@ -25,8 +25,9 @@ import useTheme from "@material-ui/styles/useTheme";
 import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import styled from "styled-components";
-import WorkExperience from "../components/about/WorkExperience";
-import Education from "../components/about/Education";
+import WorkExperience from "../components/about/work-experience";
+import Education from "../components/about/education";
+import Achievements from "../components/about/achievements";
 import Link from "@material-ui/core/Link";
 
 const TextContainer = styled.div`
@@ -43,7 +44,7 @@ const WORK_EXPERIENCE = "Work Experience";
 const EDUCATION = "Education";
 const PROJECTS = "Projects";
 const ACHIEVEMENTS = "Achievements";
-const SKILLS = "Skills";
+const SKILLS = "Technical Skills";
 const PERSONAL = "Personal";
 
 const Projects = () => {
@@ -51,19 +52,6 @@ const Projects = () => {
     <Typography variant="body2">
       Please check out my <Link href="/projects">projects page</Link> for a
       complete list.
-    </Typography>
-  );
-};
-
-const Achievements = () => {
-  return (
-    <Typography variant="body2">
-      Et anim qui ad laborum. Magna ex sint in adipisicing labore nostrud
-      commodo amet qui officia est. Qui ad reprehenderit dolor cupidatat sint
-      anim laborum mollit eiusmod sint mollit. Eiusmod commodo sunt eu cupidatat
-      incididunt dolor nulla duis amet culpa do nostrud officia non. Occaecat
-      aliqua culpa reprehenderit velit cupidatat dolore voluptate ea. Dolore
-      nostrud ex ea duis id eu eu commodo do tempor.
     </Typography>
   );
 };
