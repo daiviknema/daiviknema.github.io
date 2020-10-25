@@ -17,6 +17,9 @@ module.exports = {
           profileUrl: `https://github.com/daiviknema`,
           username: `daiviknema`,
         },
+        email: {
+          emailId: `mailto:daiviknema@gmail.com`
+        }
       },
     },
     description: ``,
@@ -111,6 +114,8 @@ module.exports = {
         },
       },
     },
+    // Smooth scrolling
+    `gatsby-plugin-anchor-links`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
