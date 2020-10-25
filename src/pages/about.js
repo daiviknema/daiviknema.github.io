@@ -29,6 +29,7 @@ import WorkExperience from "../components/about/work-experience";
 import Education from "../components/about/education";
 import Achievements from "../components/about/achievements";
 import Link from "@material-ui/core/Link";
+import TechnicalSkills from "../components/about/technical-skills";
 
 const TextContainer = styled.div`
   text-align: left;
@@ -52,17 +53,6 @@ const Projects = () => {
     <Typography variant="body2">
       Please check out my <Link href="/projects">projects page</Link> for a
       complete list.
-    </Typography>
-  );
-};
-
-const Skills = () => {
-  return (
-    <Typography variant="body2">
-      Est reprehenderit nulla do dolor nisi qui esse est eu culpa enim esse ut.
-      Ullamco laborum culpa tempor magna laboris adipisicing nisi excepteur in
-      laborum ullamco non enim cupidatat. Sunt ad incididunt nulla labore velit
-      tempor aliquip commodo id aliqua commodo ad ipsum.
     </Typography>
   );
 };
@@ -126,7 +116,7 @@ const AboutPage = ({ data, location }) => {
       sectionTitle: SKILLS,
       sectionHref: "/about#skills",
       sectionAnchor: "skills",
-      sectionContent: <Skills />,
+      sectionContent: <TechnicalSkills />,
       sectionIcon: (
         <Code fontSize="small" style={{ fill: theme.palette.text.primary }} />
       ),
