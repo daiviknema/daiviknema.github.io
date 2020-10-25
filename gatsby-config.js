@@ -17,6 +17,9 @@ module.exports = {
           profileUrl: `https://github.com/daiviknema`,
           username: `daiviknema`,
         },
+        email: {
+          emailId: `mailto:daiviknema@gmail.com`
+        }
       },
     },
     description: ``,

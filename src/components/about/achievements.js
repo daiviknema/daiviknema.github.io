@@ -6,7 +6,7 @@ const Achievements = () => {
     font-weight: 600;
   `;
   return (
-    <ul style={{ paddingLeft: "12px" }}>
+    <ul style={{ paddingLeft: "12px", marginTop: "8px" }}>
       <li>
         <Emphasis>
           Teaching Assistant, Data Structures and Algorithms course

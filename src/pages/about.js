@@ -19,6 +19,7 @@ import {
   Work,
   Code,
   Toys,
+  GetApp,
 } from "@material-ui/icons";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
 import useTheme from "@material-ui/styles/useTheme";
@@ -30,6 +31,8 @@ import Education from "../components/about/education";
 import Achievements from "../components/about/achievements";
 import Link from "@material-ui/core/Link";
 import TechnicalSkills from "../components/about/technical-skills";
+import { Button, withStyles } from "@material-ui/core";
+import resume from "../../content/assets/daivik-resume.pdf";
 
 const TextContainer = styled.div`
   text-align: left;
@@ -41,6 +44,19 @@ const AboutPageTimelineItem = styled.div`
   }
 `;
 
+const StyledLink = withStyles({
+  root: {
+    fontWeight: "bold",
+  },
+  underlineHover: {
+    fontSize: "bold",
+  },
+})(Link);
+
+const Emphasis = styled.span`
+  font-weight: 600;
+`;
+
 const WORK_EXPERIENCE = "Work Experience";
 const EDUCATION = "Education";
 const PROJECTS = "Projects";
@@ -50,20 +66,25 @@ const PERSONAL = "Personal";
 
 const Projects = () => {
   return (
-    <Typography variant="body2">
-      Please check out my <Link href="/projects">projects page</Link> for a
-      complete list.
+    <Typography variant="body2" style={{ paddingTop: "5px" }}>
+      Please check out my{" "}
+      <StyledLink href="/projects">projects page</StyledLink> for a complete
+      list.
     </Typography>
   );
 };
 
 const Personal = () => {
   return (
-    <Typography variant="body2">
-      Consectetur non duis veniam veniam exercitation voluptate labore
-      adipisicing incididunt consectetur adipisicing nisi proident. Enim in qui
-      adipisicing et magna aute et velit minim. Sit voluptate enim laborum amet
-      nostrud non officia sit sint.
+    <Typography variant="body2" style={{ paddingTop: "5px" }}>
+      Outside of work, I like to spend my time{" "}
+      <StyledLink
+        target="_blank"
+        href="https://www.instagram.com/_i_am_papa_ki_pari_/"
+      >
+        playing the piano
+      </StyledLink>{" "}
+      or reading.
     </Typography>
   );
 };
@@ -168,19 +189,38 @@ const AboutPage = ({ data, location }) => {
       <Bio>
         <TextContainer>
           <Typography variant="body1" paragraph>
-            Culpa eu amet ex voluptate voluptate incididunt sint nisi cupidatat.
-            Minim aute in Lorem cillum pariatur esse dolore occaecat et elit
-            eiusmod sint in. Fugiat Lorem consectetur consectetur laboris sunt
-            consequat sunt sint qui enim. Consequat sunt amet non labore
-            reprehenderit irure est laborum mollit. Exercitation officia eu
-            labore consectetur veniam non pariatur consequat sint fugiat.
-            Deserunt ea officia ex irure ea ad sit proident reprehenderit
-            consequat commodo. Dolor qui minim officia Lorem id ipsum eu
-            commodo. Tempor nisi ullamco est culpa ad laborum ut sit excepteur
-            aliqua ut veniam qui. Labore aliqua non est officia incididunt enim
-            non proident et sit. Magna consectetur eu duis ipsum veniam fugiat.
-            Irure nisi aute eu aute.
+            <Emphasis>
+              I am a full-stack developer with 2+ years of professional
+              experience working in the software industry
+            </Emphasis>
+            . Before starting my professional journey, I was an undergrad at{" "}
+            <StyledLink target="_blank" href="https://www.bits-pilani.ac.in/">
+              Birla Institute of Technology & Science, Pilani
+            </StyledLink>{" "}
+            - one of India's finest engineering institutes, where I earned my
+            Bachelor's degree in Computer Science.
           </Typography>
+          <Typography variant="body1" paragraph>
+            My present interests are extremely varied - ranging from the
+            complete gamut of{" "}
+            <Emphasis>
+              web technologies to competitive programming to machine learning,
+              math and statistics . The most up-to-date and complete details of
+              my work experience, educational qualifications, technical skills
+              and accolades can be found below on this page
+            </Emphasis>
+            . The same information, perhaps slightly outdated depending on how
+            lazy I've been, can also be viewed in PDF format by downloading a
+            copy of my resume below:
+          </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<GetApp />}
+            href={resume}
+          >
+            Download PDF Resume
+          </Button>
         </TextContainer>
       </Bio>
       <Grid container>

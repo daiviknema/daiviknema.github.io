@@ -1,7 +1,7 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import { Link } from "gatsby-theme-material-ui";
-import { LinkedIn, GitHub, Instagram } from "@material-ui/icons";
+import { LinkedIn, GitHub, Instagram, Email } from "@material-ui/icons";
 import Img from "gatsby-image";
 import Grid from "@material-ui/core/Grid";
 import styled from "styled-components";
@@ -15,19 +15,19 @@ const SocialMediaIconsGridContainer = styled.div`
   padding: 1rem;
 `;
 
-const SocialMediaIconsGrid = ({ linkedinUrl, instagramUrl, githubUrl }) => {
+const SocialMediaIconsGrid = ({ linkedinUrl, instagramUrl, githubUrl, email }) => {
   return (
     <SocialMediaIconsGridContainer>
       <Grid container alignItems="center" justify="center">
         {linkedinUrl && (
-          <Grid item xs={4}>
+          <Grid item xs={2}>
             <Link target="_blank" href={linkedinUrl} color="textPrimary">
               <LinkedIn />
             </Link>
           </Grid>
         )}
         {instagramUrl && (
-          <Grid item xs={4}>
+          <Grid item xs={2}>
             <Link
               target={`${githubUrl && "_blank"}`}
               href={`${"#" && githubUrl}`}
@@ -38,13 +38,23 @@ const SocialMediaIconsGrid = ({ linkedinUrl, instagramUrl, githubUrl }) => {
           </Grid>
         )}
         {instagramUrl && (
-          <Grid item xs={4}>
+          <Grid item xs={2}>
             <Link
               target={`${instagramUrl && "_blank"}`}
               href={`${"#" && instagramUrl}`}
               color="textPrimary"
             >
               <Instagram />
+            </Link>
+          </Grid>
+        )}
+        {email && (
+          <Grid item xs={2}>
+            <Link
+              href={`${"#" && email}`}
+              color="textPrimary"
+            >
+              <Email />
             </Link>
           </Grid>
         )}
@@ -73,6 +83,9 @@ const Bio = ({ children }) => {
                 username
                 profileUrl
               }
+              email {
+                emailId
+              }
             }
           }
         }
@@ -92,6 +105,7 @@ const Bio = ({ children }) => {
     instagram,
     linkedin,
     github,
+    email,
   } = data?.site?.siteMetadata?.author?.social;
   return (
     <Grid container alignItems="center" justify="center">
@@ -106,6 +120,7 @@ const Bio = ({ children }) => {
             instagramUrl={instagram?.profileUrl}
             githubUrl={github?.profileUrl}
             linkedinUrl={linkedin?.profileUrl}
+            email={email?.emailId}
           />
         </ImgContainer>
       </Grid>
