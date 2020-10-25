@@ -1,10 +1,10 @@
 import React from "react";
-import AppLayout from "../layouts/app-layout";
+import AppLayout from "../layouts/app-layout/app-layout";
 import UnderConstruction from "../components/under-construction/under-construction";
 
-const ProjectsPage = () => {
+const ProjectsPage = ({ location }) => {
   return (
-    <AppLayout>
+    <AppLayout location={location}>
       <UnderConstruction />
     </AppLayout>
   );

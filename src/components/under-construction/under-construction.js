@@ -1,12 +1,15 @@
 import React from "react";
-import styles from "./under-construction.module.css";
-import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
 import { useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import useTheme from "@material-ui/styles/useTheme";
+import styled from "styled-components";
+
+const UnderConstructionContainer = styled.div`
+  padding: 1rem 0.2rem;
+`;
 
 const UnderConstruction = () => {
   const data = useStaticQuery(graphql`
@@ -23,7 +26,7 @@ const UnderConstruction = () => {
   const theme = useTheme();
   const isXsToSmScreen = useMediaQuery(theme.breakpoints.between("xs", "sm"));
   return (
-    <Container className={styles.container}>
+    <UnderConstructionContainer>
       <Grid container>
         <Grid item xs={12}>
           <Typography variant="h5">
@@ -47,7 +50,7 @@ const UnderConstruction = () => {
           </Grid>
         )}
       </Grid>
-    </Container>
+    </UnderConstructionContainer>
   );
 };
 

@@ -7,15 +7,18 @@ module.exports = {
       social: {
         instagram: {
           profileUrl: `https://www.instagram.com/code.or.die/`,
-          username: `@code.or.die`
+          username: `@code.or.die`,
         },
         linkedin: {
           profileUrl: `https://in.linkedin.com/public-profile/in/daivik-nema-3bb44114a`,
-          username: `Daivik Nema`
+          username: `Daivik Nema`,
         },
         github: {
           profileUrl: `https://github.com/daiviknema`,
-          username: `daiviknema`
+          username: `daiviknema`,
+        },
+        email: {
+          emailId: `mailto:daiviknema@gmail.com`
         }
       },
     },
@@ -23,6 +26,7 @@ module.exports = {
     siteUrl: `https://daiviknema.github.io/`,
   },
   plugins: [
+    `gatsby-plugin-styled-components`,
     {
       // Source plugin to bring in markdown files from the filesystem
       // Generates allFile and file nodes
@@ -103,13 +107,15 @@ module.exports = {
               },
               {
                 family: `Oswald`,
-                variants: [`300`, `400`, `500`]
-              }
+                variants: [`300`, `400`, `500`],
+              },
             ],
           },
         },
       },
     },
+    // Smooth scrolling
+    `gatsby-plugin-anchor-links`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
