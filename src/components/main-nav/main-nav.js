@@ -101,7 +101,7 @@ const MainNavForXsToSmDevice = ({ site, location }) => {
 
   return (
     <div>
-      <Grid container alignItems="center">
+      <Grid container alignItems="stretch">
         <Grid item xs={10}>
           <Link underline="none" href="/">
             <Typography color="textPrimary" variant="h1">
@@ -109,12 +109,11 @@ const MainNavForXsToSmDevice = ({ site, location }) => {
             </Typography>
           </Link>
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={1} style={{margin: "auto 0px 0px 0px"}}>
           <Button onClick={toggleDrawer}>
             <MenuIcon fontSize="large" />
           </Button>
         </Grid>
-        <Grid item xs={1} />
       </Grid>
       <Drawer anchor="right" open={state.showDrawer} onClose={toggleDrawer}>
         {drawerItems()}
