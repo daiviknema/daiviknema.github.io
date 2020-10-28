@@ -8,7 +8,7 @@ const skills = [
   {
     name: "java",
     title: "Java EE",
-    description: "(Maven/Spring/Spring Boot/MyBatis/Hibernate)",
+    description: "Maven, Spring, Spring Boot, MyBatis, Hibernate",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ const skills = [
   {
     name: "c++",
     title: "C/C++",
-    description: "(Make/CMake/C++14)",
+    description: "Make, CMake, C++14",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +102,7 @@ const skills = [
   {
     name: "javascript",
     title: "JavaScript",
-    description: "(ES6/Webpack/Babel)",
+    description: "ES6, Webpack, Babel",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -158,7 +158,7 @@ const skills = [
   {
     name: "python",
     title: "Python Scripting",
-    description: "(Python3/BeautifulSoup/Selenium)",
+    description: "Python3, BeautifulSoup, Selenium",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -180,7 +180,7 @@ const skills = [
   {
     name: "reactjs",
     title: "ReactJS",
-    description: "(ReactJS + Redux for State Management)",
+    description: "ReactJS, Redux, Material UI, React Router",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -253,7 +253,7 @@ const skills = [
   {
     name: "database-technologies",
     title: "Database Technologies",
-    description: "(PostgreSQL/SQLite/MySQL/MS SQL Server)",
+    description: "PostgreSQL, MySQL, MS SQL Server",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -284,7 +284,7 @@ const skills = [
     name: "machine-learning",
     title: "ML/Scientific Computing",
     description:
-      "(Tensorflow/Keras/scikit-learn/NumPy/Pandas/Matplotlib/mlpack)",
+      "Tensorflow, Keras, scikit-learn, NumPy, Pandas, Matplotlib, mlpack",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
