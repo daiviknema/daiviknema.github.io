@@ -52,16 +52,35 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const { createPage } = actions;
 
+  const allBlogPosts = result.data.allMdx.nodes;
+
   // Create a page for each mdx node. createPage requires:
   // 1. A slug (provided in the "path attribute")
   // 2. A template that will render the page (this template takes our mdx node as input to fill in the data)
   // 3. A context. This specifies the variables which will be available in the apge query of the template
-  result.data.allMdx.nodes.forEach(node => {
+  allBlogPosts.forEach(node => {
     createPage({
       path: node.fields.slug,
       component: path.resolve(`./src/templates/blog-post.js`),
       context: {
         id: node.id,
+      },
+    });
+  });
+
+  const numPostsPerIndexPage = 1;
+  const numIndexPages = Math.ceil(allBlogPosts.length / numPostsPerIndexPage);
+
+  // Create a page for every batch of 6 mdx nodes (index pages)
+  Array.from({ length: numIndexPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `blog` : `blog/${i + 1}`,
+      component: path.resolve('./src/templates/blog-post-index.js'),
+      context: {
+        limit: numPostsPerIndexPage,
+        skip: i * numPostsPerIndexPage,
+        numIndexPages,
+        currentPage: i + 1
       },
     });
   });
