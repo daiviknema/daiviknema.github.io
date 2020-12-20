@@ -68,7 +68,7 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  const numPostsPerIndexPage = 1;
+  const numPostsPerIndexPage = 6;
   const numIndexPages = Math.ceil(allBlogPosts.length / numPostsPerIndexPage);
 
   // Create a page for every batch of 6 mdx nodes (index pages)
@@ -80,7 +80,8 @@ exports.createPages = async ({ graphql, actions }) => {
         limit: numPostsPerIndexPage,
         skip: i * numPostsPerIndexPage,
         numIndexPages,
-        currentPage: i + 1
+        currentPage: i + 1,
+        numPostsPerIndexPage
       },
     });
   });

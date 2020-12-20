@@ -12,8 +12,6 @@ const StyledFooter = styled.footer`
   justify-content: center;
   line-height: 24px;
   display: flex;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
   width: 100%;
 `;
 

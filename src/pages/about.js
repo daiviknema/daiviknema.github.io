@@ -223,8 +223,8 @@ const AboutPage = ({ data, location }) => {
           </Button>
         </TextContainer>
       </Bio>
-      <Grid container>
-        <Grid item xs={1} md={3}>
+      <Grid container style={{paddingBottom: '4rem'}}>
+        <Grid item xs={1} md={2}>
           <Timeline
             style={{
               paddingLeft: "0px",
@@ -246,7 +246,7 @@ const AboutPage = ({ data, location }) => {
             })}
           </Timeline>
         </Grid>
-        <Grid item xs={11} md={9}>
+        <Grid item xs={11} md={10}>
           {aboutPageSections.map(aboutPageSection => (
             <AboutPageSection
               sectionAnchor={aboutPageSection.sectionAnchor}
