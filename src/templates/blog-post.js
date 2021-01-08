@@ -1,9 +1,11 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { MDXProvider } from "@mdx-js/react"
-import { MDXRenderer } from "gatsby-plugin-mdx"
-import { Link } from "gatsby"
-const shortcodes = { Link } // Provide common components here
+import { MDXProvider } from "@mdx-js/react";
+import { MDXRenderer } from "gatsby-plugin-mdx";
+import { Link } from "gatsby";
+import "katex/dist/katex.min.css";
+import "katex/dist/katex";
+const shortcodes = { Link }; // Provide common components here
 
 export default function BlogPostTemplate({ data }) {
   console.log(data);

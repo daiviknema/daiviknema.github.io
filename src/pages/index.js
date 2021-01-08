@@ -1,5 +1,4 @@
 import React from "react";
-import { graphql } from "gatsby";
 import AppLayout from "../layouts/app-layout/app-layout";
 import styled from "styled-components";
 import SEO from "../components/seo";
@@ -28,7 +27,7 @@ const StyledLink = withStyles({
   },
 })(Link);
 
-const App = ({ data, location }) => {
+const App = ({ location }) => {
   return (
     <AppLayout location={location}>
       {/* TODO: Fill out description and meta */}
@@ -67,36 +66,3 @@ const App = ({ data, location }) => {
 };
 
 export default App;
-
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-        author {
-          social {
-            instagram {
-              username
-              profileUrl
-            }
-            linkedin {
-              username
-              profileUrl
-            }
-            github {
-              username
-              profileUrl
-            }
-          }
-        }
-      }
-    }
-    avatar: file(absolutePath: { regex: "/logo-final.png/" }) {
-      childImageSharp {
-        fluid(maxWidth: 2600, quality: 100) {
-          ...GatsbyImageSharpFluid_noBase64
-        }
-      }
-    }
-  }
-`;

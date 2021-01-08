@@ -1,16 +1,7 @@
 import React from "react";
 import SEO from "../components/seo";
-import Bio from "../components/bio/bio";
 import AppLayout from "../layouts/app-layout/app-layout";
 import AboutPageSection from "../layouts/about-page-section/about-page-section";
-import {
-  Timeline,
-  TimelineItem,
-  TimelineOppositeContent,
-  TimelineSeparator,
-  TimelineDot,
-  TimelineConnector,
-} from "@material-ui/lab";
 import Typography from "@material-ui/core/Typography";
 import {
   EmojiEvents,
@@ -20,8 +11,8 @@ import {
   Code,
   Toys,
   GetApp,
+  Home,
 } from "@material-ui/icons";
-import { AnchorLink } from "gatsby-plugin-anchor-links";
 import useTheme from "@material-ui/styles/useTheme";
 import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -33,15 +24,12 @@ import Link from "@material-ui/core/Link";
 import TechnicalSkills from "../components/about/technical-skills";
 import { Button, withStyles } from "@material-ui/core";
 import resume from "../../content/assets/daivik-resume.pdf";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
 const TextContainer = styled.div`
   text-align: left;
-`;
-
-const AboutPageTimelineItem = styled.div`
-  .MuiTimelineItem-missingOppositeContent::before {
-    padding: 0px;
-  }
+  padding-top: 5px;
 `;
 
 const StyledLink = withStyles({
@@ -57,6 +45,7 @@ const Emphasis = styled.span`
   font-weight: 600;
 `;
 
+const INTRODUCTION = "Introduction";
 const WORK_EXPERIENCE = "Work Experience";
 const EDUCATION = "Education";
 const PROJECTS = "Projects";
@@ -89,18 +78,73 @@ const Personal = () => {
   );
 };
 
-const AboutPage = ({ data, location }) => {
+const Introduction = () => {
+  return (
+    <TextContainer isXsToSmScreen>
+      <Typography variant="body1" paragraph>
+        <Emphasis>
+          I am a full-stack developer with 2+ years of professional experience
+          working in the software industry
+        </Emphasis>
+        . Before starting my professional journey, I was an undergrad at{" "}
+        <StyledLink target="_blank" href="https://www.bits-pilani.ac.in/">
+          Birla Institute of Technology & Science, Pilani
+        </StyledLink>{" "}
+        - one of India's finest engineering institutes, where I earned my
+        Bachelor's degree in Computer Science.
+      </Typography>
+      <Typography variant="body1" paragraph>
+        My present interests are extremely varied - ranging from the complete
+        gamut of{" "}
+        <Emphasis>
+          web technologies to competitive programming to machine learning, math
+          and statistics . The most up-to-date and complete details of my work
+          experience, educational qualifications, technical skills and accolades
+          can be found below on this page
+        </Emphasis>
+        . The same information, perhaps slightly outdated depending on how lazy
+        I've been, can also be viewed in PDF format by downloading a copy of my
+        resume below:
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        startIcon={<GetApp />}
+        href={resume}
+      >
+        Download PDF Resume
+      </Button>
+    </TextContainer>
+  );
+};
+
+const AboutPage = ({ location }) => {
   const theme = useTheme();
   const isXsToSmScreen = useMediaQuery(theme.breakpoints.between("xs", "sm"));
 
   const aboutPageSections = [
+    {
+      sectionTitle: INTRODUCTION,
+      sectionHref: "/about#introduction",
+      sectionAnchor: "introduction",
+      sectionContent: <Introduction />,
+      sectionIcon: (
+        <Home
+          fontSize="small"
+          style={{ fill: theme.palette.text.primary, marginLeft: "9px" }}
+        />
+      ),
+    },
     {
       sectionTitle: WORK_EXPERIENCE,
       sectionHref: "/about#professional-experience",
       sectionAnchor: "professional-experience",
       sectionContent: <WorkExperience />,
       sectionIcon: (
-        <Work fontSize="small" style={{ fill: theme.palette.text.primary }} />
+        <Work
+          fontSize="small"
+          style={{ fill: theme.palette.text.primary, marginLeft: "9px" }}
+        />
       ),
     },
     {
@@ -109,7 +153,10 @@ const AboutPage = ({ data, location }) => {
       sectionAnchor: "education",
       sectionContent: <Education />,
       sectionIcon: (
-        <School fontSize="small" style={{ fill: theme.palette.text.primary }} />
+        <School
+          fontSize="small"
+          style={{ fill: theme.palette.text.primary, marginLeft: "9px" }}
+        />
       ),
     },
     {
@@ -118,7 +165,10 @@ const AboutPage = ({ data, location }) => {
       sectionAnchor: "projects",
       sectionContent: <Projects />,
       sectionIcon: (
-        <Toys fontSize="small" style={{ fill: theme.palette.text.primary }} />
+        <Toys
+          fontSize="small"
+          style={{ fill: theme.palette.text.primary, marginLeft: "9px" }}
+        />
       ),
     },
     {
@@ -129,7 +179,7 @@ const AboutPage = ({ data, location }) => {
       sectionIcon: (
         <EmojiEvents
           fontSize="small"
-          style={{ fill: theme.palette.text.primary }}
+          style={{ fill: theme.palette.text.primary, marginLeft: "9px" }}
         />
       ),
     },
@@ -139,7 +189,10 @@ const AboutPage = ({ data, location }) => {
       sectionAnchor: "skills",
       sectionContent: <TechnicalSkills />,
       sectionIcon: (
-        <Code fontSize="small" style={{ fill: theme.palette.text.primary }} />
+        <Code
+          fontSize="small"
+          style={{ fill: theme.palette.text.primary, marginLeft: "9px" }}
+        />
       ),
     },
     {
@@ -148,37 +201,96 @@ const AboutPage = ({ data, location }) => {
       sectionAnchor: "personal",
       sectionContent: <Personal />,
       sectionIcon: (
-        <Star fontSize="small" style={{ fill: theme.palette.text.primary }} />
+        <Star
+          fontSize="small"
+          style={{ fill: theme.palette.text.primary, marginLeft: "9px" }}
+        />
       ),
     },
   ];
 
-  const TimelineSegment = ({
-    caption,
-    href,
-    sectionIcon,
-    isTerminalSegment,
-  }) => {
+  function a11yProps(index) {
+    return {
+      id: `vertical-tab-${index}`,
+      "aria-controls": `vertical-tabpanel-${index}`,
+    };
+  }
+
+  const TabPanel = props => {
+    const { children, value, index, ...other } = props;
+
     return (
-      <AboutPageTimelineItem>
-        <TimelineItem>
-          {!isXsToSmScreen && (
-            <TimelineOppositeContent style={{ paddingTop: "14px" }}>
-              <Typography variant="caption">{caption}</Typography>
-            </TimelineOppositeContent>
-          )}
-          <TimelineSeparator>
-            <TimelineDot style={{ marginTop: "2px", marginBottom: "2px" }}>
-              <AnchorLink to={href} underline="none">
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  {sectionIcon}
-                </div>
-              </AnchorLink>
-            </TimelineDot>
-            {isTerminalSegment && <TimelineConnector />}
-          </TimelineSeparator>
-        </TimelineItem>
-      </AboutPageTimelineItem>
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`vertical-tabpanel-${index}`}
+        aria-labelledby={`vertical-tab-${index}`}
+        {...other}
+      >
+        {value === index && children}
+      </div>
+    );
+  };
+
+  const VerticalTabs = () => {
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
+
+    const StyledTab = withStyles(() => ({
+      root: {
+        padding: "unset",
+        maxWidth: "unset",
+        minWidth: "unset",
+        paddingRight: "10px",
+      },
+      wrapper: {
+        flexDirection: "row-reverse",
+        justifyContent: "right",
+      },
+    }))(props => <Tab disableRipple {...props} />);
+
+    return (
+      <Grid
+        container
+        style={{
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "row",
+          minHeight: "0",
+        }}
+      >
+        <Grid item xs={2}>
+          <Tabs
+            orientation="vertical"
+            variant="scrollable"
+            indicatorColor="primary"
+            value={value}
+            onChange={handleChange}
+            aria-label="Vertical tabs example"
+            style={{ height: "80vh" }}
+          >
+            {aboutPageSections.map((sectionInfo, index) => (
+              <StyledTab
+                label={isXsToSmScreen ? undefined : sectionInfo?.sectionTitle}
+                {...a11yProps(index)}
+                icon={sectionInfo?.sectionIcon}
+              />
+            ))}
+          </Tabs>
+        </Grid>
+        <Grid item xs={10}>
+          {aboutPageSections.map((sectionInfo, index) => (
+            <TabPanel value={value} index={index}>
+              <AboutPageSection sectionTitle={sectionInfo.sectionTitle}>
+                {sectionInfo?.sectionContent}
+              </AboutPageSection>
+            </TabPanel>
+          ))}
+        </Grid>
+      </Grid>
     );
   };
 
@@ -186,75 +298,9 @@ const AboutPage = ({ data, location }) => {
     <AppLayout location={location}>
       {/* TODO: Fill out description and meta */}
       <SEO title="About" description="" meta={[]} />
-      <Bio>
-        <TextContainer>
-          <Typography variant="body1" paragraph>
-            <Emphasis>
-              I am a full-stack developer with 2+ years of professional
-              experience working in the software industry
-            </Emphasis>
-            . Before starting my professional journey, I was an undergrad at{" "}
-            <StyledLink target="_blank" href="https://www.bits-pilani.ac.in/">
-              Birla Institute of Technology & Science, Pilani
-            </StyledLink>{" "}
-            - one of India's finest engineering institutes, where I earned my
-            Bachelor's degree in Computer Science.
-          </Typography>
-          <Typography variant="body1" paragraph>
-            My present interests are extremely varied - ranging from the
-            complete gamut of{" "}
-            <Emphasis>
-              web technologies to competitive programming to machine learning,
-              math and statistics . The most up-to-date and complete details of
-              my work experience, educational qualifications, technical skills
-              and accolades can be found below on this page
-            </Emphasis>
-            . The same information, perhaps slightly outdated depending on how
-            lazy I've been, can also be viewed in PDF format by downloading a
-            copy of my resume below:
-          </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<GetApp />}
-            href={resume}
-          >
-            Download PDF Resume
-          </Button>
-        </TextContainer>
-      </Bio>
       <Grid container>
-        <Grid item xs={1} md={3}>
-          <Timeline
-            style={{
-              paddingLeft: "0px",
-              paddingRight: "0px",
-              paddingTop: "20px",
-              position: "sticky",
-              top: "10px",
-            }}
-          >
-            {aboutPageSections.map((aboutPageSection, index) => {
-              return (
-                <TimelineSegment
-                  caption={aboutPageSection.sectionTitle}
-                  href={aboutPageSection.sectionHref}
-                  sectionIcon={aboutPageSection.sectionIcon}
-                  isTerminalSegment={index !== aboutPageSections.length - 1}
-                />
-              );
-            })}
-          </Timeline>
-        </Grid>
-        <Grid item xs={11} md={9}>
-          {aboutPageSections.map(aboutPageSection => (
-            <AboutPageSection
-              sectionAnchor={aboutPageSection.sectionAnchor}
-              sectionTitle={aboutPageSection.sectionTitle}
-            >
-              {aboutPageSection?.sectionContent}
-            </AboutPageSection>
-          ))}
+        <Grid item xs={12} style={{ marginTop: "1rem" }}>
+          <VerticalTabs />
         </Grid>
       </Grid>
     </AppLayout>

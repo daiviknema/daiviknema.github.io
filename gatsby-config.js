@@ -18,8 +18,8 @@ module.exports = {
           username: `daiviknema`,
         },
         email: {
-          emailId: `mailto:daiviknema@gmail.com`
-        }
+          emailId: `mailto:daiviknema@gmail.com`,
+        },
       },
     },
     description: ``,
@@ -49,6 +49,18 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: "gatsby-remark-katex",
+          },
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              path: `${__dirname}/content/assets`,
+              maxWidth: 1200,
+            },
+          },
+        ],
         extenstions: [`.mdx`, `.md`],
       },
     },
@@ -116,6 +128,8 @@ module.exports = {
     },
     // Smooth scrolling
     `gatsby-plugin-anchor-links`,
+    `gatsby-plugin-transition-link`,
+    `gatsby-remark-images`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

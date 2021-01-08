@@ -2,7 +2,7 @@ import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "gatsby-theme-material-ui";
+import AniLink from "gatsby-plugin-transition-link/AniLink";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Drawer from "@material-ui/core/Drawer";
@@ -20,7 +20,7 @@ const navTargets = [
   },
   {
     name: "Blog",
-    href: "/blog",
+    href: "/blog/1",
   },
   {
     name: "Projects",
@@ -71,7 +71,7 @@ const MainNavForXsToSmDevice = ({ site, location }) => {
       <div>
         <List>
           {navTargets.map(navTarget => (
-            <Link underline="none" href={navTarget.href}>
+            <AniLink style={{textDecoration: 'none'}} underline="none" paintDrip to={navTarget.href} hex={theme.palette.text.primary}>
               <ListItem
                 button
                 key={navTarget.name}
@@ -87,7 +87,7 @@ const MainNavForXsToSmDevice = ({ site, location }) => {
                   </Typography>
                 </DrawerItem>
               </ListItem>
-            </Link>
+            </AniLink>
           ))}
         </List>
       </div>
@@ -103,11 +103,11 @@ const MainNavForXsToSmDevice = ({ site, location }) => {
     <div>
       <Grid container alignItems="stretch">
         <Grid item xs={10}>
-          <Link underline="none" href="/">
+          <AniLink style={{textDecoration: 'none'}} underline="none" paintDrip to="/" hex={theme.palette.text.primary}>
             <Typography color="textPrimary" variant="h1">
               {site.siteMetadata.title}
             </Typography>
-          </Link>
+          </AniLink>
         </Grid>
         <Grid item xs={1} style={{margin: "auto 0px 0px 0px"}}>
           <Button onClick={toggleDrawer}>
@@ -128,11 +128,11 @@ const MainNavForMdToXlDevice = ({ site, location }) => {
   return (
     <Grid container alignItems="baseline">
       <Grid item md={6}>
-        <Link underline="none" href="/">
+        <AniLink style={{textDecoration: 'none'}} underline="none" paintDrip hex={theme.palette.text.primary} to="/">
           <Typography color="textPrimary" variant="h1">
             {site.siteMetadata.title}
           </Typography>
-        </Link>
+          </AniLink>
       </Grid>
       <Grid item md={2} />
       {navTargets.map(navTarget => {
@@ -147,11 +147,11 @@ const MainNavForMdToXlDevice = ({ site, location }) => {
               isActive={location?.pathname?.includes(navTarget.href)}
               underlineColor={theme.palette.text.primary}
             >
-              <Link underline="none" href={navTarget.href}>
+              <AniLink style={{textDecoration: 'none'}} underline="none" paintDrip hex={theme.palette.text.primary} to={navTarget.href}>
                 <Typography color="textPrimary" variant="h6">
                   {navTarget.name}
                 </Typography>
-              </Link>
+              </AniLink>
             </NavMenuItem>
           </Grid>
         );
