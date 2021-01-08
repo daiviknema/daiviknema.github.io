@@ -17,8 +17,8 @@ const BlogList = ({ posts, numPostsPerIndexPage }) => {
 
   const StyledDivider = withStyles({
     root: {
-      marginBottom: '5px'
-    }
+      marginBottom: "5px",
+    },
   })(Divider);
 
   return (
@@ -119,6 +119,7 @@ export const pageQuery = graphql`
       limit: $limit
       skip: $skip
       sort: { fields: frontmatter___date, order: DESC }
+      filter: { frontmatter: { published: { eq: true } } }
     ) {
       nodes {
         frontmatter {

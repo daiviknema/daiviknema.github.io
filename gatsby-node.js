@@ -39,12 +39,18 @@ exports.createPages = async ({ graphql, actions }) => {
   // the result of this query to create pages
   const result = await graphql(`
     query {
-      allMdx {
+      allMdx(
+        sort: { fields: frontmatter___date, order: DESC }
+        filter: { frontmatter: { published: { eq: true } } }
+      ) {
         nodes {
           fields {
             slug
           }
           id
+          frontmatter {
+            published
+          }
         }
       }
     }
@@ -53,6 +59,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
   const allBlogPosts = result.data.allMdx.nodes;
+  console.log(allBlogPosts);
 
   // Create a page for each mdx node. createPage requires:
   // 1. A slug (provided in the "path attribute")
@@ -71,7 +78,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const numPostsPerIndexPage = 3;
   const numIndexPages = Math.ceil(allBlogPosts.length / numPostsPerIndexPage);
 
-  // Create a page for every batch of 6 mdx nodes (index pages)
+  // Create a page for every batch of 3 mdx nodes (index pages)
   Array.from({ length: numIndexPages }).forEach((_, i) => {
     createPage({
       path: `blog/${i + 1}`,
