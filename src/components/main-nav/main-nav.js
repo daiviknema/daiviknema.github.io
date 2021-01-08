@@ -20,7 +20,7 @@ const navTargets = [
   },
   {
     name: "Blog",
-    href: "/blog",
+    href: "/blog/1",
   },
   {
     name: "Projects",

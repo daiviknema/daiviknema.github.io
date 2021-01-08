@@ -3,36 +3,52 @@ import AppLayout from "../layouts/app-layout/app-layout";
 import Grid from "@material-ui/core/Grid";
 import { graphql } from "gatsby";
 import { Divider, Typography, withStyles } from "@material-ui/core";
-import { Link } from "gatsby-theme-material-ui";
 import moment from "moment";
-
-const StyledLink = withStyles({
-  root: {
-    fontWeight: "bold",
-  },
-  underlineHover: {
-    fontSize: "bold",
-  },
-})(Link);
+import AniLink from "gatsby-plugin-transition-link/AniLink";
+import { useTheme } from "@material-ui/core/styles";
+import styled from "styled-components";
 
 const BlogList = ({ posts, numPostsPerIndexPage }) => {
+  const theme = useTheme();
+
+  const Excerpt = styled.div`
+    padding-bottom: 5px;
+  `;
+
+  const StyledDivider = withStyles({
+    root: {
+      marginBottom: '5px'
+    }
+  })(Divider);
+
   return (
     <Grid container>
       {posts.map((post, idx) => {
         const { title, date } = post?.frontmatter;
         const excerpt = post?.frontmatter?.excerpt || post?.excerpt;
-        const href = post?.slug;
+        const href = `/blog/${post?.slug}`;
         return (
           <Grid item xs={12}>
-            <StyledLink href={href}>
+            <AniLink
+              style={{
+                textDecoration: "none",
+                color: theme.palette.primary.main,
+              }}
+              underline="none"
+              paintDrip
+              to={href}
+              hex={theme.palette.text.primary}
+            >
               <Typography variant="h4">{title}</Typography>
-            </StyledLink>
+            </AniLink>
             <Typography variant="caption">
               {moment(date).format("LL")}
             </Typography>
-            <Typography variant="body1">{excerpt}</Typography>
+            <Excerpt>
+              <Typography variant="body1">{excerpt}</Typography>
+            </Excerpt>
             {idx !== Math.min(posts.length - 1, numPostsPerIndexPage - 1) && (
-              <Divider />
+              <StyledDivider />
             )}
           </Grid>
         );
@@ -42,10 +58,38 @@ const BlogList = ({ posts, numPostsPerIndexPage }) => {
 };
 
 const Pagination = ({ numIndexPages, currentPage }) => {
+  const theme = useTheme();
+
+  const nextPage = currentPage !== numIndexPages && currentPage + 1;
+  const prevPage = currentPage !== 1 && currentPage - 1;
+
+  const nextPageHref =
+    (nextPage && `/blog/${nextPage}`) || `/blog/${currentPage}`;
+  const prevPageHref =
+    (prevPage && `/blog/${prevPage}`) || `/blog/${currentPage}`;
   return (
     <Grid container>
-      <Grid item xs={12}>
-        <div>Pagination!</div>
+      <Grid item xs={6} style={{ textAlign: "center" }}>
+        <AniLink
+          style={{ textDecoration: "none", color: theme.palette.text.primary }}
+          underline="none"
+          paintDrip
+          to={prevPageHref}
+          hex={theme.palette.text.primary}
+        >
+          {"<< Prev"}
+        </AniLink>
+      </Grid>
+      <Grid item xs={6} style={{ textAlign: "center" }}>
+        <AniLink
+          style={{ textDecoration: "none", color: theme.palette.text.primary }}
+          underline="none"
+          paintDrip
+          to={nextPageHref}
+          hex={theme.palette.text.primary}
+        >
+          {"Next >>"}
+        </AniLink>
       </Grid>
     </Grid>
   );
