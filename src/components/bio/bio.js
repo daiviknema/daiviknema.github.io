@@ -15,7 +15,12 @@ const SocialMediaIconsGridContainer = styled.div`
   padding: 1rem;
 `;
 
-const SocialMediaIconsGrid = ({ linkedinUrl, instagramUrl, githubUrl, email }) => {
+const SocialMediaIconsGrid = ({
+  linkedinUrl,
+  instagramUrl,
+  githubUrl,
+  email,
+}) => {
   return (
     <SocialMediaIconsGridContainer>
       <Grid container alignItems="center" justify="center">
@@ -50,10 +55,7 @@ const SocialMediaIconsGrid = ({ linkedinUrl, instagramUrl, githubUrl, email }) =
         )}
         {email && (
           <Grid item xs={2}>
-            <Link
-              href={`${"#" && email}`}
-              color="textPrimary"
-            >
+            <Link href={`${"#" && email}`} color="textPrimary">
               <Email />
             </Link>
           </Grid>
@@ -124,7 +126,6 @@ const Bio = ({ children }) => {
           />
         </ImgContainer>
       </Grid>
-
       <Grid item xs={12} md={8}>
         {children}
       </Grid>

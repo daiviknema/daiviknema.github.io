@@ -5,8 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 
 const AboutSectionInternal = styled.div`
-  padding: 10px 20px;
-  margin-top: 1rem;
+padding-bottom: 20px;
 `;
 
 const AboutPageSection = ({ sectionTitle, sectionAnchor, children }) => {
