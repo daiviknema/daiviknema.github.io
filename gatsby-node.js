@@ -59,7 +59,6 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
   const allBlogPosts = result.data.allMdx.nodes;
-  console.log(allBlogPosts);
 
   // Create a page for each mdx node. createPage requires:
   // 1. A slug (provided in the "path attribute")
