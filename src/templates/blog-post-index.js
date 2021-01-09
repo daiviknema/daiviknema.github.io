@@ -45,7 +45,9 @@ const BlogList = ({ posts, numPostsPerIndexPage }) => {
               {moment(date).format("LL")}
             </Typography>
             <Excerpt>
-              <Typography variant="body1">{excerpt}</Typography>
+              <Typography variant="body1">
+                <div dangerouslySetInnerHTML={{ __html: excerpt }} />
+              </Typography>
             </Excerpt>
             {idx !== Math.min(posts.length - 1, numPostsPerIndexPage - 1) && (
               <StyledDivider />
